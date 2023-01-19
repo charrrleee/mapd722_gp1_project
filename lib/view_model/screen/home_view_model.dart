@@ -1,6 +1,6 @@
-import '../framework.dart';
+import '../../framework.dart';
 
-class LoginViewModel extends BaseViewModel {
+class HomeViewModel extends BaseViewModel {
   String username = "";
   String password = "";
 
