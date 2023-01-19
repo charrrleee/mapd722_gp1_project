@@ -6,4 +6,5 @@ class Routes {
   static const String viewPatientRecords = "/viewPatientRecords";
   static const String editPatient = "/editPatient";
   static const String addPatient = "/addPatient";
+  static const String addPatientRecord = "/addPatientRecord";
 }
