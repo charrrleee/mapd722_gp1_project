@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mapd722_gp1_project/routes.dart';
+import 'package:mapd722_gp1_project/view/screen/add_patient_view.dart';
 import 'package:mapd722_gp1_project/view/screen/home_view.dart';
 import 'package:mapd722_gp1_project/view/screen/login_view.dart';
 import 'package:mapd722_gp1_project/view/screen/view_patients_view.dart';
@@ -27,6 +28,8 @@ class MyApp extends StatelessWidget {
             const HomeView(title: "HomeView"),
         Routes.viewPatients: (BuildContext context) =>
             const ViewPatientsView(title: "ViewPatientsView"),
+        Routes.addPatient: (BuildContext context) =>
+            const AddPatientView(title: "AddPatientView"),
       },
     );
   }

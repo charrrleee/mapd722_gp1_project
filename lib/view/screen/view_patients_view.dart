@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../framework.dart';
+import '../../routes.dart';
 import '../../view_model/screen/view_patients_view_model.dart';
 import '../widget/appBar.dart';
 import '../widget/searchBar.dart';
@@ -21,7 +22,16 @@ class ViewPatientsViewState
       appBar: appBar(
         "Patient Clinical Data",
         "View All Patients",
-        [],
+        [
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, Routes.home),
+            icon: const Icon(Icons.home),
+          ),
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, Routes.addPatient),
+            icon: const Icon(Icons.add),
+          )
+        ],
       ),
       body: Column(children: [
         SearchBar(),
