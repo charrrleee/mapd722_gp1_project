@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mapd722_gp1_project/routes.dart';
 import 'package:mapd722_gp1_project/view/screen/home_view.dart';
 import 'package:mapd722_gp1_project/view/screen/login_view.dart';
+import 'package:mapd722_gp1_project/view/screen/view_patients_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,8 +25,9 @@ class MyApp extends StatelessWidget {
       routes: {
         Routes.home: (BuildContext context) =>
             const HomeView(title: "HomeView"),
+        Routes.viewPatients: (BuildContext context) =>
+            const ViewPatientsView(title: "ViewPatientsView"),
       },
     );
   }
 }
-

@@ -32,7 +32,9 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
             },
             child: const Text("View All Patient"),
           ),
-          ListView()
+          ListView(
+            children: const <Card>[],
+          )
         ],
       ),
     );
