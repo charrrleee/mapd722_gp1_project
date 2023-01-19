@@ -7,4 +7,5 @@ class Patient {
   late final String dateOfBirth;
   late final String weight;
   late final String height;
+  late final String imgURL;
 }
