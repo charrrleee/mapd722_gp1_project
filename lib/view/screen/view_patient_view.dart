@@ -20,7 +20,7 @@ class ViewPatientViewState
     return Scaffold(
       appBar: appBar(
         "${vm.patient.id} ${vm.patient.firstname} ${vm.patient.lastname}",
-        "View All Patients",
+        "Patient Overview",
         [
           IconButton(
             onPressed: () => Navigator.pushNamed(context, Routes.home),
