@@ -20,8 +20,8 @@ class AddPatientViewState
   Widget buildChild(ctx, AddPatientViewModel vm) {
     return Scaffold(
       appBar: appBar(
-        "Patient Clinical Data",
-        "View All Patients",
+        "Add Patient",
+        "",
         [
           IconButton(
             onPressed: () => Navigator.pushNamed(context, Routes.home),
