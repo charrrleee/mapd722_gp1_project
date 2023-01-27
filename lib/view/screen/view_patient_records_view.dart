@@ -38,10 +38,9 @@ class ViewPatientRecordsViewState
           )
         ],
       ),
-      body: Column(children: [
-        // todo fold card
-        ListView()
-      ]),
+      body: Expanded(
+        child: ListView(),
+      ),
     );
   }
 

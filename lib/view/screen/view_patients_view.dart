@@ -35,15 +35,17 @@ class ViewPatientsViewState
       ),
       body: Column(children: [
         SearchBar(),
-        ListView(
-          children: vm.simplePatients
-              .map(
-                (e) => Row(children: [
-                  Text(e.id),
-                  Text(e.name),
-                ]),
-              )
-              .toList(),
+        Expanded(
+          child: ListView(
+            children: vm.simplePatients
+                .map(
+                  (e) => Row(children: [
+                    Text(e.id),
+                    Text(e.name),
+                  ]),
+                )
+                .toList(),
+          ),
         )
       ]),
     );
