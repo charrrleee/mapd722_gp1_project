@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mapd722_gp1_project/model/simple_patient.dart';
 import 'package:mapd722_gp1_project/view/widget/appBar.dart';
 
 import '../../framework.dart';
 import '../../routes.dart';
 import '../../view_model/screen/home_view_model.dart';
+import '../widget/card.dart';
 import '../widget/search_patient_icon.dart';
 
 class HomeView extends StatefulWidget {
@@ -36,10 +36,19 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
             child: const Text("View All Patient"),
           ),
           Expanded(
-            child: ListView(
-              children: const <Card>[],
-            ),
-          )
+              child: ListView.builder(
+            itemCount: vm.patientList.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: PatientCard(vm.patientList[index]),
+                onTap: () => Navigator.pushNamed(
+                  context,
+                  Routes.viewPatient,
+                  arguments: {"patient", vm.patientList[index]},
+                ),
+              );
+            },
+          ))
         ],
       ),
     );

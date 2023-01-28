@@ -90,7 +90,7 @@ class EditPatientViewState
                     obscureText: true,
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      labelText: vm.patient.height,
+                      labelText: vm.patient.height.toString(),
                     ),
                   ),
                 ],

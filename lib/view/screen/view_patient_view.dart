@@ -57,13 +57,13 @@ class ViewPatientViewState
             Row(
               children: [
                 const Text("height"),
-                Text(vm.patient.height),
+                Text(vm.patient.height.toString()),
               ],
             ),
             Row(
               children: [
                 const Text("weight"),
-                Text(vm.patient.weight),
+                Text(vm.patient.weight.toString()),
               ],
             ),
           ],

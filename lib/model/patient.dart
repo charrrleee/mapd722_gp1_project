@@ -5,8 +5,8 @@ class Patient {
   final String lastname;
   final String bedNumber;
   final String dateOfBirth;
-  final String weight;
-  final String height;
+  final double weight;
+  final double height;
   final String imgURL;
 
   Patient(this.id, this.firstname, this.lastname, this.bedNumber,
@@ -19,8 +19,8 @@ class Patient {
         json["lastName"],
         json["bedNumber"],
         json["dateOfBirth"],
-        json["weight"],
-        json["height"],
-        json["imgURL"]);
+        double.parse(json["weight"].toString()),
+        double.parse(json["height"].toString()),
+        json["photoUrl"]);
   }
 }

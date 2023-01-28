@@ -1,29 +1,23 @@
-import 'dart:convert';
-
-import 'package:http/http.dart' as http;
+import 'package:mapd722_gp1_project/model/patient.dart';
+import 'package:mapd722_gp1_project/service/patientService.dart';
 
 import '../../framework.dart';
-import '../../model/simple_patient.dart';
 
 class HomeViewModel extends BaseViewModel {
-  List<SimplePatient> recommendList = [];
+  List<Patient> patientList = [];
 
   HomeViewModel() {
-    fetchPatient();
-  }
-
-  fetchPatient() async {
-    String url = "https://gp5.onrender.com/patients";
-    List<dynamic> patients = [];
-    await http.get(Uri.parse(url)).then((response) {
-      patients = jsonDecode(response.body)["data"] as List<dynamic>;
-      recommendList = patients.map((element) {
-        return SimplePatient(
-            "${element["id"]}",
-            "${element["firstName"]} ${element["lastName"]}",
-            "${element["bedNumber"]}");
-      }).toList();
-      notifyListeners();
-    });
+    try {
+      PatientService().fetch().then((response) {
+        if (response!.success == true) {
+          print(response.list![0]);
+          patientList = response.list!.map((e) => Patient.fromJson(e)).toList();
+        }
+        print("????");
+        notifyListeners();
+      });
+    } catch (e) {
+      print("???? $e");
+    }
   }
 }
