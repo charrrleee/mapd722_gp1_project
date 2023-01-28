@@ -10,14 +10,12 @@ class HomeViewModel extends BaseViewModel {
     try {
       PatientService().fetch().then((response) {
         if (response!.success == true) {
-          print(response.list![0]);
           patientList = response.list!.map((e) => Patient.fromJson(e)).toList();
         }
-        print("????");
         notifyListeners();
       });
     } catch (e) {
-      print("???? $e");
+      print("fetch Patient List Error : $e");
     }
   }
 }
