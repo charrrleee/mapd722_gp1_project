@@ -4,7 +4,7 @@ import '../../framework.dart';
 import '../../routes.dart';
 import '../../view_model/screen/add_patient_view_model.dart';
 import '../widget/appBar.dart';
-import '../widget/searchBar.dart';
+import '../widget/search_patient_icon.dart';
 
 class AddPatientView extends StatefulWidget {
   const AddPatientView({Key? key, required this.title}) : super(key: key);
@@ -43,7 +43,7 @@ class AddPatientViewState
         ],
       ),
       body: Column(children: [
-        SearchBar(),
+        // SearchBar(),
         // todo forms
       ]),
     );

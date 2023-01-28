@@ -6,6 +6,7 @@ import 'package:mapd722_gp1_project/view/screen/edit_patient_view.dart';
 import 'package:mapd722_gp1_project/view/screen/home_view.dart';
 import 'package:mapd722_gp1_project/view/screen/login_view.dart';
 import 'package:mapd722_gp1_project/view/screen/view_patient_records_view.dart';
+import 'package:mapd722_gp1_project/view/screen/view_patient_view.dart';
 import 'package:mapd722_gp1_project/view/screen/view_patients_view.dart';
 
 void main() {
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         Routes.viewPatientRecords: (BuildContext context) =>
             const ViewPatientRecordsView(title: "ViewPatientRecordsView"),
         Routes.viewPatient: (BuildContext context) =>
-            const ViewPatientsView(title: "ViewPatientsView"),
+            const ViewPatientView(title: "ViewPatientView"),
         Routes.addPatientRecord: (BuildContext context) =>
             const AddPatientRecordView(title: "AddPatientRecordView"),
       },

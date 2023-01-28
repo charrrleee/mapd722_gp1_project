@@ -15,7 +15,7 @@ class ListResponse {
 
   final int status;
   final String message;
-  final List<Map<String, dynamic>>? list;
+  List<Map<String, dynamic>>? list = [];
 
   ListResponse(this.success, this.status, this.message, {this.list});
 

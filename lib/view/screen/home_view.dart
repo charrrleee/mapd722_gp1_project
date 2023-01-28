@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mapd722_gp1_project/model/simple_patient.dart';
 import 'package:mapd722_gp1_project/view/widget/appBar.dart';
 
 import '../../framework.dart';
 import '../../routes.dart';
 import '../../view_model/screen/home_view_model.dart';
-import '../widget/searchBar.dart';
+import '../widget/search_patient_icon.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key, required this.title}) : super(key: key);
@@ -21,11 +22,13 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
       appBar: appBar(
         "Patient Clinical Data",
         "Home Page - Welcome!",
-        [],
+        [
+          searchPatientIcon(ctx),
+        ],
       ),
       body: Column(
         children: [
-          SearchBar(),
+          // SearchBar(), move to app bar
           ElevatedButton(
             onPressed: () {
               Navigator.pushNamed(context, Routes.viewPatients);

@@ -4,7 +4,7 @@ import '../../framework.dart';
 import '../../routes.dart';
 import '../../view_model/screen/view_patients_view_model.dart';
 import '../widget/appBar.dart';
-import '../widget/searchBar.dart';
+import '../widget/search_patient_icon.dart';
 
 class ViewPatientsView extends StatefulWidget {
   const ViewPatientsView({Key? key, required this.title}) : super(key: key);
@@ -34,7 +34,7 @@ class ViewPatientsViewState
         ],
       ),
       body: Column(children: [
-        SearchBar(),
+        // SearchBar(),
         Expanded(
           child: ListView(
             children: vm.simplePatients
