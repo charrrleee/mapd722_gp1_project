@@ -7,7 +7,24 @@ class GetResponse {
   late final String message;
   late final Map<String, dynamic>? data;
 
-  GetResponse(this.success, this.status, this.message, this.data);
+  GetResponse(this.success, this.status, this.message, {this.data});
+
+  factory GetResponse.fromJson(Dict json) {
+    if (json["success"] == true) {
+      return GetResponse(
+        json["success"],
+        json["status"],
+        json["message"],
+        data: json["data"],
+      );
+    } else {
+      return GetResponse(
+        json["success"],
+        json["status"],
+        json["message"],
+      );
+    }
+  }
 }
 
 class ListResponse {
