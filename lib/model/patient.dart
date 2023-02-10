@@ -1,4 +1,5 @@
 import 'package:mapd722_gp1_project/ext.dart';
+import 'package:mapd722_gp1_project/model/patientRecord.dart';
 
 class Patient {
   // todo add more fields
@@ -24,6 +25,7 @@ class Patient {
   final String updateAt;
   final String medicalNotes;
   final String doctor;
+  late PatientRecord records;
 
   Patient(
       this.id,

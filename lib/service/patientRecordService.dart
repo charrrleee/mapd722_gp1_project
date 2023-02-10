@@ -20,7 +20,6 @@ class PatientRecordService {
     return resp;
   }
 
-
   Future<GetResponse?> create(PatientRecord record) async {
     var url = "$baseURL/patients/${record.patientId}/tests/";
     var resp = await http.post(Uri.parse(url), body: record).then((response) {

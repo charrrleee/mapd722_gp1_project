@@ -30,7 +30,8 @@ class HomeViewModel extends BaseViewModel {
       )
           .then((response) {
         if (response!.success == true) {
-          patientList = response.list!.map((e) => Patient.fromJson(e)).toList();
+          patientRecordList =
+              response.list!.map((e) => PatientRecord.fromJson(e)).toList();
         }
         notifyListeners();
       });
