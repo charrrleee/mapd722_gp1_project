@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mapd722_gp1_project/model/patient.dart';
 
 import '../../framework.dart';
 import '../../routes.dart';
@@ -17,6 +18,8 @@ class ViewPatientViewState
     extends BaseMVVMState<ViewPatientView, ViewPatientViewModel> {
   @override
   Widget buildChild(ctx, ViewPatientViewModel vm) {
+    vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
+
     return Scaffold(
       appBar: appBar(
         "${vm.patient.id} ${vm.patient.firstname} ${vm.patient.lastname}",

@@ -1,6 +1,6 @@
 import 'package:mapd722_gp1_project/ext.dart';
 
-import '../Enums.dart';
+import '../enums.dart';
 
 class PatientRecord {
   final String id;

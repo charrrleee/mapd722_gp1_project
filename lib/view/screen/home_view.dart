@@ -44,7 +44,7 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
                 onTap: () => Navigator.pushNamed(
                   context,
                   Routes.viewPatient,
-                  arguments: {"patient", vm.patientMap.values.toList()[index]},
+                  arguments: vm.patientMap.values.toList()[index],
                 ),
               );
             },

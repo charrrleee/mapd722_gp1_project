@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../Enums.dart';
+import '../../enums.dart';
 import '../../model/patient.dart';
 
 class PatientCard extends StatelessWidget {
