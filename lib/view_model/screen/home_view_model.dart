@@ -1,42 +1,39 @@
 import 'package:mapd722_gp1_project/model/patient.dart';
 import 'package:mapd722_gp1_project/model/patientRecord.dart';
+import 'package:mapd722_gp1_project/model/response.dart';
 import 'package:mapd722_gp1_project/service/patientService.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../framework.dart';
 import '../../service/patientRecordService.dart';
 
 class HomeViewModel extends BaseViewModel {
-  List<Patient> patientList = [];
-  List<PatientRecord> patientRecordList = [];
+  Map<String, Patient> patientMap = {};
 
   HomeViewModel() {
-    try {
-      PatientService().fetch().then((response) {
-        if (response!.success == true) {
-          patientList = response.list!.map((e) => Patient.fromJson(e)).toList();
-        }
-        notifyListeners();
-      });
-    } catch (e) {
-      print("fetch Patient List Error : $e");
-    }
-
-    try {
+    Rx.combineLatest2(
+      PatientService().fetch().asStream(),
       PatientRecordService()
           .fetch(
-        DateTime.now().subtract(const Duration(days: 7)),
-        DateTime.now(),
-        "",
-      )
-          .then((response) {
-        if (response!.success == true) {
-          patientRecordList =
-              response.list!.map((e) => PatientRecord.fromJson(e)).toList();
+            DateTime.now().subtract(const Duration(days: 7)),
+            DateTime.now(),
+            "",
+          )
+          .asStream(),
+      (resp1, resp2) {
+        // todo handle connection error case
+        for (var e in (resp1 as ListResponse).list!) {
+          var patient = Patient.fromJson(e);
+          patientMap[patient.id] = patient;
         }
-        notifyListeners();
-      });
-    } catch (e) {
-      print("fetch Patient List Error : $e");
-    }
+        for (var e in (resp2 as ListResponse).list!) {
+          var record = PatientRecord.fromJson(e);
+          var patient = patientMap[record.patientId];
+          patient?.records.add(record);
+        }
+      },
+    ).listen((event) {
+      notifyListeners();
+    });
   }
 }

@@ -25,7 +25,7 @@ class Patient {
   final String updateAt;
   final String medicalNotes;
   final String doctor;
-  late PatientRecord records;
+  List<PatientRecord> records = [];
 
   Patient(
       this.id,

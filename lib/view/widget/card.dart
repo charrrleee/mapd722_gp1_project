@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../Enums.dart';
 import '../../model/patient.dart';
 
 class PatientCard extends StatelessWidget {
@@ -9,15 +10,22 @@ class PatientCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // todo handling styling
+    List<Widget> listWidget = [
+      Text("${patient.bedNumber} ${patient.lastname} ${patient.firstname}")
+    ];
+
+    for (var e in patient.records) {
+      if (e.critical.isNotEmpty) {
+        listWidget
+            .add(Text("${parseCategoryString[e.category]} ${e.critical}"));
+      }
+    }
     return Row(
       children: [
         Image.network(patient.imgURL),
         const Spacer(),
         Column(
-          children: [
-            Text("${patient.bedNumber} ${patient.lastname} ${patient.firstname}"),
-          ],
+          children: listWidget,
         )
       ],
     );

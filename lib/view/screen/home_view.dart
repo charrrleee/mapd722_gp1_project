@@ -37,14 +37,14 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
           ),
           Expanded(
               child: ListView.builder(
-            itemCount: vm.patientList.length,
+            itemCount: vm.patientMap.values.length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: PatientCard(vm.patientList[index]),
+                title: PatientCard(vm.patientMap.values.toList()[index]),
                 onTap: () => Navigator.pushNamed(
                   context,
                   Routes.viewPatient,
-                  arguments: {"patient", vm.patientList[index]},
+                  arguments: {"patient", vm.patientMap.values.toList()[index]},
                 ),
               );
             },

@@ -1,13 +1,15 @@
 import 'package:mapd722_gp1_project/ext.dart';
 
+import '../Enums.dart';
+
 class PatientRecord {
   final String id;
   final String patientId;
   final String nurseName;
   final String modifyDate;
-  final String category;
+  final CategoryEnum category;
   final String readings;
-  String? critical;
+  String critical = "";
 
   PatientRecord(
     this.id,
@@ -24,7 +26,7 @@ class PatientRecord {
       json["patientId"],
       json["nurseName"],
       json["modifyDate"],
-      json["category"],
+      parseCategory[json["category"]]!,
       json["readings"],
     );
     record.critical = markCriticalCondition(record.readings, record.category);
@@ -32,12 +34,15 @@ class PatientRecord {
   }
 }
 
-markCriticalCondition(String readings, String category) {
+markCriticalCondition(String readings, CategoryEnum category) {
   List<String> ranges = readings.split(",");
   double boundary = double.parse(ranges[0]);
   String critical = "";
   switch (category) {
-    case "BLOOD_PRESSURE":
+    case CategoryEnum.bloodPressure:
+      if (ranges.length == 1) {
+        break;
+      }
       double upperBoundary = double.parse(ranges[1]);
       if (boundary > 140 || upperBoundary > 90) {
         critical = "High";
@@ -45,21 +50,19 @@ markCriticalCondition(String readings, String category) {
         critical = "Low";
       }
       break;
-    case "RESPIRATORY_RATE":
+    case CategoryEnum.respiratoryRate:
       if (boundary > 24) {
         critical = "High";
       } else if (boundary < 10) {
         critical = "Low";
       }
       break;
-
-    case "BLOOD_OXYGEN_LEVEL":
+    case CategoryEnum.bloodOxygenLevel:
       if (boundary < 92) {
         critical = "Low";
       }
       break;
-
-    case "HEARTBEAT_RATE":
+    case CategoryEnum.heartbeatRate:
       if (boundary > 100) {
         critical = "High";
       } else if (boundary < 60) {
