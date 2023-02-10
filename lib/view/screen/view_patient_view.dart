@@ -5,6 +5,7 @@ import '../../framework.dart';
 import '../../routes.dart';
 import '../../view_model/screen/view_patient_view_model.dart';
 import '../widget/appBar.dart';
+import '../widget/text.dart';
 
 class ViewPatientView extends StatefulWidget {
   const ViewPatientView({Key? key, required this.title}) : super(key: key);
@@ -44,29 +45,31 @@ class ViewPatientViewState
         // todo make the rows as reuse components
         Column(
           children: [
-            // todo add image url component
+            const SizedBox(height: 50),
+            Image.network(vm.patient.imgURL),
+            const SizedBox(height: 50),
             Row(
               children: [
-                const Text("name"),
-                Text(vm.patient.lastname),
+                textFieldStyleText("First Name", vm.patient.firstname),
+                textFieldStyleText("Last Name", vm.patient.lastname),
               ],
             ),
             Row(
               children: [
-                const Text("Date of Birth"),
-                Text(vm.patient.dateOfBirth)
+                textFieldStyleText("Gender", vm.patient.gender),
+                textFieldStyleText(
+                    "Disabled", vm.patient.disabled ? "Yes" : "No"),
               ],
             ),
             Row(
               children: [
-                const Text("height"),
-                Text(vm.patient.height.toString()),
+                textFieldStyleText("Date of Birth", vm.patient.dateOfBirth.toIso8601String().substring(0,10)),
               ],
             ),
             Row(
               children: [
-                const Text("weight"),
-                Text(vm.patient.weight.toString()),
+                textFieldStyleText("Height", vm.patient.height.toString()),
+                textFieldStyleText("Weight", vm.patient.weight.toString()),
               ],
             ),
           ],

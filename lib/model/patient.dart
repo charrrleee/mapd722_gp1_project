@@ -7,7 +7,7 @@ class Patient {
   final String firstname;
   final String lastname;
   final String bedNumber;
-  final String dateOfBirth;
+  final DateTime dateOfBirth;
   final double weight;
   final double height;
   final String imgURL;
@@ -54,7 +54,7 @@ class Patient {
       json["firstName"],
       json["lastName"],
       json["bedNumber"],
-      json["dateOfBirth"],
+      DateTime.parse(json["dateOfBirth"]),
       double.parse(json["weight"].toString()),
       double.parse(json["height"].toString()),
       json["photoUrl"],
