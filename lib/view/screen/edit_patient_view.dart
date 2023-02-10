@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../../framework.dart';
+import '../../model/patient.dart';
 import '../../routes.dart';
 import '../../view_model/screen/edit_patient_view_model.dart';
 import '../widget/appBar.dart';
+import '../widget/textfield.dart';
 
 class EditPatientView extends StatefulWidget {
   const EditPatientView({Key? key, required this.title}) : super(key: key);
@@ -17,6 +19,8 @@ class EditPatientViewState
     extends BaseMVVMState<EditPatientView, EditPatientViewModel> {
   @override
   Widget buildChild(ctx, EditPatientViewModel vm) {
+    vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
+
     return Scaffold(
       appBar: appBar(
         "${vm.patient.id} ${vm.patient.firstname} ${vm.patient.lastname}",
@@ -43,72 +47,35 @@ class EditPatientViewState
       ),
       body: Column(
         children: [
-          // todo make the rows as reuse components
-          Column(
+          const SizedBox(height: 50),
+          Center(
+            child: Image.network(vm.patient.imgURL),
+          ),
+          const SizedBox(height: 50),
+          Row(
             children: [
-              // todo add image url component
-              Row(
-                children: [
-                  const Text("name"),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: vm.patient.firstname,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text("Date of Birth"),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: vm.patient.lastname,
-                    ),
-                  )
-                ],
-              ),
-              Row(
-                children: [
-                  const Text("height"),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: vm.patient.dateOfBirth.toIso8601String(),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text("weight"),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: vm.patient.height.toString(),
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  const Text("Image URL"),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      labelText: vm.patient.imgURL,
-                    ),
-                  ),
-                ],
-              )
+              customTextField(
+                  "First Name", vm.patient.firstname, vm.onChangeFirstName),
+              customTextField(
+                  "Last Name", vm.patient.lastname, vm.onChangeFirstName),
             ],
-          )
+          ),
+          Row(
+            children: [
+              customTextField(
+                  "Date of Birth",
+                  vm.patient.dateOfBirth.toIso8601String().substring(0, 10),
+                  vm.onChangeFirstName),
+            ],
+          ),
+          Row(
+            children: [
+              customTextField(
+                  "Height", vm.patient.height.toString(), vm.onChangeFirstName),
+              customTextField(
+                  "Weight", vm.patient.weight.toString(), vm.onChangeFirstName),
+            ],
+          ),
         ],
       ),
     );

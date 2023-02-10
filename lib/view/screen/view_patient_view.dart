@@ -31,7 +31,11 @@ class ViewPatientViewState
             icon: const Icon(Icons.home),
           ),
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, Routes.editPatient),
+            onPressed: () => Navigator.pushNamed(
+              context,
+              Routes.editPatient,
+              arguments: vm.patient,
+            ),
             icon: const Icon(Icons.edit),
           ),
           IconButton(
@@ -63,7 +67,8 @@ class ViewPatientViewState
             ),
             Row(
               children: [
-                textFieldStyleText("Date of Birth", vm.patient.dateOfBirth.toIso8601String().substring(0,10)),
+                textFieldStyleText("Date of Birth",
+                    vm.patient.dateOfBirth.toIso8601String().substring(0, 10)),
               ],
             ),
             Row(

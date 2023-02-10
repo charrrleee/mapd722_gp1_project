@@ -7,4 +7,8 @@ class EditPatientViewModel extends BaseViewModel {
   bool updatePatient() {
     return false;
   }
+
+  onChangeFirstName(String? text){
+
+  }
 }
