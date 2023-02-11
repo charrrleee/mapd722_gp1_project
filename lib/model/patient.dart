@@ -7,7 +7,7 @@ class Patient {
   final String firstname;
   final String lastname;
   final String bedNumber;
-  final DateTime dateOfBirth;
+  DateTime dateOfBirth;
   final double weight;
   final double height;
   final String imgURL;

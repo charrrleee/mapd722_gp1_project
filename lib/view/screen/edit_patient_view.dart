@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../framework.dart';
@@ -17,6 +18,24 @@ class EditPatientView extends StatefulWidget {
 
 class EditPatientViewState
     extends BaseMVVMState<EditPatientView, EditPatientViewModel> {
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 216,
+        padding: const EdgeInsets.only(top: 6.0),
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        color: CupertinoColors.systemBackground.resolveFrom(context),
+        child: SafeArea(
+          top: false,
+          child: child,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget buildChild(ctx, EditPatientViewModel vm) {
     vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
@@ -37,7 +56,7 @@ class EditPatientViewState
                 Navigator.pushNamed(
                   context,
                   Routes.viewPatient,
-                  arguments: {"patientId", vm.patient.id},
+                  arguments: vm.patient.id,
                 );
               }
             },
@@ -55,26 +74,56 @@ class EditPatientViewState
           Row(
             children: [
               customTextField(
-                  "First Name", vm.patient.firstname, vm.onChangeFirstName),
+                "First Name",
+                vm.patient.firstname,
+                vm.onChangeFirstName,
+              ),
               customTextField(
-                  "Last Name", vm.patient.lastname, vm.onChangeFirstName),
+                "Last Name",
+                vm.patient.lastname,
+                vm.onChangeLastName,
+              ),
             ],
           ),
           Row(
             children: [
               customTextField(
-                  "Date of Birth",
+                "Height (cm)",
+                vm.patient.height.toString(),
+                vm.onChangeHeight,
+              ),
+              customTextField(
+                "Weight (kg)",
+                vm.patient.weight.toString(),
+                vm.onChangeWeight,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              const Text("Date of Birth",
+                  style: TextStyle(fontSize: 25.0, color: Colors.black)),
+              const Spacer(),
+              CupertinoButton(
+                onPressed: () => _showDialog(
+                  CupertinoDatePicker(
+                    initialDateTime: vm.patient.dateOfBirth,
+                    mode: CupertinoDatePickerMode.date,
+                    use24hFormat: true,
+                    onDateTimeChanged: vm.onDateTimeChanged,
+                  ),
+                ),
+                child: Text(
                   vm.patient.dateOfBirth.toIso8601String().substring(0, 10),
-                  vm.onChangeFirstName),
+                  style: const TextStyle(fontSize: 22.0, color: Colors.black),
+                ),
+              )
             ],
           ),
-          Row(
-            children: [
-              customTextField(
-                  "Height", vm.patient.height.toString(), vm.onChangeFirstName),
-              customTextField(
-                  "Weight", vm.patient.weight.toString(), vm.onChangeFirstName),
-            ],
+          customTextField(
+            "Image Url",
+            vm.patient.imgURL,
+            vm.onChangeImageUrl,
           ),
         ],
       ),

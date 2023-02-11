@@ -8,7 +8,18 @@ class EditPatientViewModel extends BaseViewModel {
     return false;
   }
 
-  onChangeFirstName(String? text){
+  onChangeFirstName(String? text) {}
 
+  onChangeLastName(String? text) {}
+
+  onChangeHeight(String? text) {}
+
+  onChangeWeight(String? text) {}
+
+  onChangeImageUrl(String? text) {}
+
+  onDateTimeChanged(DateTime newDate) {
+    patient.dateOfBirth = newDate;
+    notifyListeners();
   }
 }
