@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../framework.dart';
+import '../../model/patient.dart';
 import '../../routes.dart';
 import '../../view_model/screen/view_patient_records_view_model.dart';
 import '../widget/appBar.dart';
@@ -18,6 +19,9 @@ class ViewPatientRecordsViewState
     extends BaseMVVMState<ViewPatientRecordsView, ViewPatientRecordsViewModel> {
   @override
   Widget buildChild(ctx, ViewPatientRecordsViewModel vm) {
+    vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
+    vm.patientRecords = vm.patient.records;
+
     return Scaffold(
       appBar: appBar(
         "${vm.patient.id} ${vm.patient.firstname} ${vm.patient.lastname}",
@@ -38,9 +42,7 @@ class ViewPatientRecordsViewState
           )
         ],
       ),
-      body: Expanded(
-        child: ListView(),
-      ),
+      body: Column(children: [],)
     );
   }
 

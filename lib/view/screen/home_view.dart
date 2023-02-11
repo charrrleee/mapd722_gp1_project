@@ -24,6 +24,10 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
         "Home Page - Welcome!",
         [
           searchPatientIcon(ctx),
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, Routes.addPatient),
+            icon: const Icon(Icons.add),
+          )
         ],
       ),
       body: Column(

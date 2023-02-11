@@ -39,8 +39,11 @@ class ViewPatientViewState
             icon: const Icon(Icons.edit),
           ),
           IconButton(
-            onPressed: () =>
-                Navigator.pushNamed(context, Routes.viewPatientRecords),
+            onPressed: () => Navigator.pushNamed(
+              context,
+              Routes.viewPatientRecords,
+              arguments: vm.patient,
+            ),
             icon: const Icon(Icons.document_scanner),
           )
         ],

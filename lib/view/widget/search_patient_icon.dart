@@ -92,7 +92,11 @@ class MySearchDelegate extends SearchDelegate with ChangeNotifier {
                 onTap: () {
                   query = suggestion;
                   // todo handle patient
-                  Navigator.pushNamed(context, Routes.viewPatient, arguments: {"patientId", "1"},);
+                  Navigator.pushNamed(
+                    context,
+                    Routes.viewPatient,
+                    arguments: {"patientId", "1"},
+                  );
                 },
               );
             },
