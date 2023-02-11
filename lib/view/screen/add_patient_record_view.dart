@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mapd722_gp1_project/view/widget/text.dart';
 
 import '../../framework.dart';
 import '../../routes.dart';
 import '../../view_model/screen/add_patient_record_view_model.dart';
 import '../widget/appBar.dart';
+import '../widget/textfield.dart';
 
 class AddPatientRecordView extends StatefulWidget {
   const AddPatientRecordView({Key? key, required this.title}) : super(key: key);
@@ -42,7 +44,60 @@ class AddPatientRecordViewState
         ],
       ),
       body: Column(children: [
-        // todo forms
+        textFieldStyleWidget(
+          "Blood Pressure",
+          Row(
+            children: [
+              customTextField(
+                "Upper(mmHg)",
+                "",
+                (String? text) {},
+              ),
+              customTextField(
+                "Lower(mmHg)",
+                "",
+                (String? text) {},
+              )
+            ],
+          ),
+        ),
+        textFieldStyleWidget(
+          "Respiratory Rate",
+          Row(
+            children: [
+              customTextField(
+                "rate(/min)",
+                "",
+                (String? text) {},
+              ),
+            ],
+          ),
+        ),
+        textFieldStyleWidget(
+          "Blood Oxygen Level",
+          Row(
+            children: [
+              customTextField(
+                "level(%)",
+                "",
+                (String? text) {},
+              ),
+            ],
+          ),
+        ),
+        textFieldStyleWidget(
+          "Heartbeat Rate",
+          Row(
+            children: [
+              customTextField(
+                "rate(/min)",
+                "",
+                (String? text) {},
+              ),
+            ],
+          ),
+        ),
+        customTextField("Nurse", "", (String? text) {})
       ]),
     );
   }

@@ -57,27 +57,36 @@ class ViewPatientViewState
             const SizedBox(height: 50),
             Row(
               children: [
-                textFieldStyleText("First Name", vm.patient.firstname),
-                textFieldStyleText("Last Name", vm.patient.lastname),
+                textFieldStyleWidget("First Name", Text(vm.patient.firstname)),
+                textFieldStyleWidget("Last Name", Text(vm.patient.lastname)),
               ],
             ),
             Row(
               children: [
-                textFieldStyleText("Gender", vm.patient.gender),
-                textFieldStyleText(
-                    "Disabled", vm.patient.disabled ? "Yes" : "No"),
+                textFieldStyleWidget("Gender", Text(vm.patient.gender)),
+                textFieldStyleWidget(
+                  "Disabled",
+                  Text(
+                    vm.patient.disabled ? "Yes" : "No",
+                  ),
+                ),
               ],
             ),
             Row(
               children: [
-                textFieldStyleText("Date of Birth",
-                    vm.patient.dateOfBirth.toIso8601String().substring(0, 10)),
+                textFieldStyleWidget(
+                    "Date of Birth",
+                    Text(vm.patient.dateOfBirth
+                        .toIso8601String()
+                        .substring(0, 10))),
               ],
             ),
             Row(
               children: [
-                textFieldStyleText("Height", vm.patient.height.toString()),
-                textFieldStyleText("Weight", vm.patient.weight.toString()),
+                textFieldStyleWidget(
+                    "Height", Text(vm.patient.height.toString())),
+                textFieldStyleWidget(
+                    "Weight", Text(vm.patient.weight.toString())),
               ],
             ),
           ],

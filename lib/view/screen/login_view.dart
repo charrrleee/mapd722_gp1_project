@@ -22,8 +22,9 @@ class LoginViewState extends BaseMVVMState<LoginView, LoginViewModel> {
         children: [
           Row(
             children: [
-              const Text("Username"),
               Expanded(
+                  child: Container(
+                margin: EdgeInsets.all(10),
                 child: TextFormField(
                   decoration: InputDecoration(
                     // contentPadding: const EdgeInsets.all(20.0),
@@ -35,24 +36,26 @@ class LoginViewState extends BaseMVVMState<LoginView, LoginViewModel> {
                   onChanged: vm.onChangeUsername,
                   // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 ),
-              ),
+              )),
             ],
           ),
           Row(
             children: [
-              const Text("Password"),
               Expanded(
-                child: TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(20.0),
-                    labelText: "Password",
-                    border: const OutlineInputBorder(),
-                    hintText: vm.username.toString(),
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.all(20.0),
+                      labelText: "Password",
+                      border: const OutlineInputBorder(),
+                      hintText: vm.username.toString(),
+                    ),
+                    // validator: (v) => vm.validateNumbersOfHour(v),
+                    onChanged: vm.onChangePassword,
+                    // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   ),
-                  // validator: (v) => vm.validateNumbersOfHour(v),
-                  onChanged: vm.onChangePassword,
-                  // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 ),
               ),
             ],
