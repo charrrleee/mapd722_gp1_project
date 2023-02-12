@@ -10,4 +10,6 @@ class AddPatientRecordViewModel extends BaseViewModel {
   bool savePatientRecord() {
     return false;
   }
+
+
 }

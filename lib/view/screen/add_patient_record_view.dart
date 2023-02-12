@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mapd722_gp1_project/view/widget/text.dart';
 
@@ -17,6 +18,24 @@ class AddPatientRecordView extends StatefulWidget {
 
 class AddPatientRecordViewState
     extends BaseMVVMState<AddPatientRecordView, AddPatientRecordViewModel> {
+  void _showDialog(Widget child) {
+    showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => Container(
+        height: 216,
+        padding: const EdgeInsets.only(top: 6.0),
+        margin: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        color: CupertinoColors.systemBackground.resolveFrom(context),
+        child: SafeArea(
+          top: false,
+          child: child,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget buildChild(ctx, AddPatientRecordViewModel vm) {
     return Scaffold(
@@ -35,7 +54,7 @@ class AddPatientRecordViewState
                 Navigator.pushNamed(
                   context,
                   Routes.viewPatientRecords,
-                  arguments: {"patientId", vm.patientId},
+                  arguments: vm.patientId,
                 );
               }
             },
@@ -44,6 +63,28 @@ class AddPatientRecordViewState
         ],
       ),
       body: Column(children: [
+        Row(
+          children: [
+            const Text("Record Date",
+                style: TextStyle(fontSize: 25.0, color: Colors.black)),
+            const Spacer(),
+            Expanded(
+                child: CupertinoButton(
+              onPressed: () => _showDialog(
+                CupertinoDatePicker(
+                  initialDateTime: DateTime.now(),
+                  mode: CupertinoDatePickerMode.dateAndTime,
+                  use24hFormat: true,
+                  onDateTimeChanged: (DateTime? datetime) {},
+                ),
+              ),
+              child: Text(
+                DateTime.now().toIso8601String().toString(),
+                style: const TextStyle(fontSize: 22.0, color: Colors.black),
+              ),
+            ))
+          ],
+        ),
         textFieldStyleWidget(
           "Blood Pressure",
           Row(

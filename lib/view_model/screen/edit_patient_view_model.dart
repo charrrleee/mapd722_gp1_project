@@ -2,6 +2,7 @@ import '../../framework.dart';
 import '../../model/patient.dart';
 
 class EditPatientViewModel extends BaseViewModel {
+  // @override
   late Patient patient;
 
   bool updatePatient() {

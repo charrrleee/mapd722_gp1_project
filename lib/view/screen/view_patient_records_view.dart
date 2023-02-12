@@ -17,10 +17,10 @@ class ViewPatientRecordsView extends StatefulWidget {
 
 class ViewPatientRecordsViewState
     extends BaseMVVMState<ViewPatientRecordsView, ViewPatientRecordsViewModel> {
+
   @override
   Widget buildChild(ctx, ViewPatientRecordsViewModel vm) {
     vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
-    vm.patientRecords = vm.patient.records;
 
     return Scaffold(
       appBar: appBar(
@@ -37,7 +37,7 @@ class ViewPatientRecordsViewState
             icon: const Icon(Icons.add),
           ),
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, Routes.viewPatient),
+            onPressed: () => Navigator.pushNamed(context, Routes.viewPatient, arguments: vm.patient),
             icon: const Icon(Icons.remove_red_eye),
           )
         ],

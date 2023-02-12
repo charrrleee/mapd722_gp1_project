@@ -27,8 +27,7 @@ class Patient {
   final String doctor;
   List<PatientRecord> records = [];
 
-  Patient(
-      this.id,
+  Patient(this.id,
       this.firstname,
       this.lastname,
       this.bedNumber,
@@ -70,5 +69,29 @@ class Patient {
       json.get("medicalNotes", ""),
       json.get("doctor", ""),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "firstName": firstname,
+      "lastName": lastname,
+      "bedNumber": bedNumber,
+      "dateOfBirth": dateOfBirth,
+      "weight": weight,
+      "height": height,
+      "photoUrl": imgURL,
+      "idCardNumber": idCardNumber,
+      "gender": gender,
+      "phoneNumber": phoneNumber,
+      "address": address,
+      "postalCode": postalCode,
+      "medicalAllergies": medicalAllergies,
+      "disabled": disabled,
+      "createdAt": createdAt,
+      "updatedAt": updateAt,
+      "medicalNotes": medicalNotes,
+      "doctor": doctor,
+    };
   }
 }

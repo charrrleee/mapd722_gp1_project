@@ -56,7 +56,7 @@ class EditPatientViewState
                 Navigator.pushNamed(
                   context,
                   Routes.viewPatient,
-                  arguments: vm.patient.id,
+                  arguments: vm.patient,
                 );
               }
             },
