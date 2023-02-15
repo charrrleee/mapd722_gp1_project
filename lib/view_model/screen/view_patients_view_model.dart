@@ -1,6 +1,6 @@
 import '../../framework.dart';
-import '../../model/simple_patient.dart';
+import '../../model/patient.dart';
 
 class ViewPatientsViewModel extends BaseViewModel {
-  List<SimplePatient> simplePatients = [];
+  List<Patient> patients = [];
 }

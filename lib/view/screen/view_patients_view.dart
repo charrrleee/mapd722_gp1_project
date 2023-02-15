@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../framework.dart';
+import '../../model/patient.dart';
 import '../../routes.dart';
 import '../../view_model/screen/view_patients_view_model.dart';
 import '../widget/appBar.dart';
-import '../widget/search_patient_icon.dart';
 
 class ViewPatientsView extends StatefulWidget {
   const ViewPatientsView({Key? key, required this.title}) : super(key: key);
@@ -18,6 +18,8 @@ class ViewPatientsViewState
     extends BaseMVVMState<ViewPatientsView, ViewPatientsViewModel> {
   @override
   Widget buildChild(ctx, ViewPatientsViewModel vm) {
+    vm.patients = ModalRoute.of(ctx)!.settings.arguments as List<Patient>;
+
     return Scaffold(
       appBar: appBar(
         "Patient Clinical Data",
@@ -36,17 +38,23 @@ class ViewPatientsViewState
       body: Column(children: [
         // SearchBar(),
         Expanded(
-          child: ListView(
-            children: vm.simplePatients
-                .map(
-                  (e) => Row(children: [
-                    Text(e.id),
-                    Text(e.name),
-                  ]),
-                )
-                .toList(),
-          ),
-        )
+            child: ListView.builder(
+          itemCount: vm.patients.length,
+          itemBuilder: (context, index) {
+            var patient = vm.patients[index];
+            return ListTile(
+              title: Text(
+                "${patient.bedNumber} ${patient.firstname} ${patient.lastname}",
+                style: const TextStyle(fontSize: 20),
+              ),
+              onTap: () => Navigator.pushNamed(
+                context,
+                Routes.viewPatient,
+                arguments: vm.patients[index],
+              ),
+            );
+          },
+        ))
       ]),
     );
   }
