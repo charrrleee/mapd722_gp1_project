@@ -15,7 +15,7 @@ class HomeViewModel extends BaseViewModel {
       PatientService().fetch().asStream(),
       PatientRecordService()
           .fetch(
-            DateTime.now().subtract(const Duration(days: 365)),
+            DateTime.now().subtract(const Duration(days: 7)),
             DateTime.now(),
             "",
           )

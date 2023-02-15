@@ -6,7 +6,8 @@ import '../model/patient.dart';
 import '../model/response.dart';
 
 class PatientService {
-  String baseURL = "https://gp5.onrender.com";
+  // String baseURL = "https://gp5.onrender.com";
+  String baseURL = "http://localhost:5000";
 
   Future<ListResponse?> fetch() async {
     String url = "$baseURL/patients";
@@ -17,9 +18,9 @@ class PatientService {
     return resp;
   }
 
-  update(Patient patient) async {
+  Future<GetResponse?> update(Patient patient) async {
     String url = "$baseURL/patients";
-    await http.patch(Uri.parse(url), body: patient, headers: {
+    return http.patch(Uri.parse(url), body: patient.toJson(), headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }).then((response) {
       var jsonResponse = jsonDecode(response.body);

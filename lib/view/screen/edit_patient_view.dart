@@ -51,14 +51,16 @@ class EditPatientViewState
           ),
           IconButton(
             onPressed: () {
-              var success = vm.updatePatient();
-              if (success) {
+              vm.updatePatient().then((value) {
+                if (value == false) {
+                  return;
+                }
                 Navigator.pushNamed(
                   context,
                   Routes.viewPatient,
                   arguments: vm.patient,
                 );
-              }
+              });
             },
             icon: const Icon(Icons.save),
           )

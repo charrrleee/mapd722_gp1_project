@@ -6,13 +6,13 @@ import '../enums.dart';
 class Patient {
   // todo add more fields
   final String id;
-  final String firstname;
-  final String lastname;
+  String firstname;
+  String lastname;
   final String bedNumber;
   DateTime dateOfBirth;
-  final double weight;
-  final double height;
-  final String imgURL;
+  double weight;
+  double height;
+  String imgURL;
 
   final int idCardNumber;
   final String gender;
@@ -80,19 +80,19 @@ class Patient {
       "firstName": firstname,
       "lastName": lastname,
       "bedNumber": bedNumber,
-      "dateOfBirth": dateOfBirth,
-      "weight": weight,
-      "height": height,
+      "dateOfBirth": dateOfBirth.toIso8601String(),
+      "weight": weight.toString(),
+      "height": height.toString(),
       "photoUrl": imgURL,
-      "idCardNumber": idCardNumber,
+      "idCardNumber": idCardNumber.toString(),
       "gender": gender,
-      "phoneNumber": phoneNumber,
+      "phoneNumber": phoneNumber.toString(),
       "address": address,
       "postalCode": postalCode,
-      "medicalAllergies": medicalAllergies,
-      "disabled": disabled,
-      "createdAt": createdAt,
-      "updatedAt": updateAt,
+      "medicalAllergies": medicalAllergies.toString(),
+      "disabled": disabled.toString(),
+      // "createdAt": createdAt,
+      // "updatedAt": updateAt,
       "medicalNotes": medicalNotes,
       "doctor": doctor,
     };
