@@ -24,6 +24,11 @@ class HomeViewModel extends BaseViewModel {
         // todo handle connection error case
         for (var e in (resp1 as ListResponse).list!) {
           var patient = Patient.fromJson(e);
+          Uri? uri = Uri.tryParse(patient.imgURL);
+          // check url is valid
+          if (!uri!.hasAbsolutePath) {
+            continue;
+          }
           patientMap[patient.id] = patient;
         }
         for (var e in (resp2 as ListResponse).list!) {
