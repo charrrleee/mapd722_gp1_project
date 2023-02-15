@@ -1,6 +1,8 @@
 import 'package:mapd722_gp1_project/ext.dart';
 import 'package:mapd722_gp1_project/model/patientRecord.dart';
 
+import '../enums.dart';
+
 class Patient {
   // todo add more fields
   final String id;
@@ -26,6 +28,7 @@ class Patient {
   final String medicalNotes;
   final String doctor;
   List<PatientRecord> records = [];
+  Map<CategoryEnum, PatientRecord> criticalRecords = {};
 
   Patient(this.id,
       this.firstname,

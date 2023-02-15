@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mapd722_gp1_project/service/shared_preferences_service.dart';
 import 'package:mapd722_gp1_project/view/widget/appBar.dart';
 
 import '../../framework.dart';
@@ -24,6 +23,10 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
         "Patient Clinical Data",
         "Home Page - Welcome!",
         [
+          IconButton(
+            onPressed: () => Navigator.pushNamed(context, Routes.viewPatients),
+            icon: const Icon(Icons.document_scanner),
+          ),
           searchPatientIcon(ctx),
           IconButton(
             onPressed: () => Navigator.pushNamed(context, Routes.addPatient),
@@ -31,30 +34,26 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
           )
         ],
       ),
-      body: Column(
-        children: [
-          // SearchBar(), move to app bar
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, Routes.viewPatients);
-            },
-            child: const Text("View All Patient"),
-          ),
-          Expanded(
-              child: ListView.builder(
-            itemCount: vm.patientMap.values.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: PatientCard(vm.patientMap.values.toList()[index]),
-                onTap: () => Navigator.pushNamed(
-                  context,
-                  Routes.viewPatient,
-                  arguments: vm.patientMap.values.toList()[index],
-                ),
-              );
-            },
-          ))
-        ],
+      body: Container(
+        color: Colors.grey[200],
+        child: Column(
+          children: [
+            Expanded(
+                child: ListView.builder(
+              itemCount: vm.patientMap.values.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: PatientCard(vm.patientMap.values.toList()[index]),
+                  onTap: () => Navigator.pushNamed(
+                    context,
+                    Routes.viewPatient,
+                    arguments: vm.patientMap.values.toList()[index],
+                  ),
+                );
+              },
+            ))
+          ],
+        ),
       ),
     );
   }

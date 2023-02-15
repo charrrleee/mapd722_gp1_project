@@ -15,7 +15,7 @@ class HomeViewModel extends BaseViewModel {
       PatientService().fetch().asStream(),
       PatientRecordService()
           .fetch(
-            DateTime.now().subtract(const Duration(days: 7)),
+            DateTime.now().subtract(const Duration(days: 365)),
             DateTime.now(),
             "",
           )
@@ -30,6 +30,9 @@ class HomeViewModel extends BaseViewModel {
           var record = PatientRecord.fromJson(e);
           var patient = patientMap[record.patientId];
           patient?.records.add(record);
+          if (record.critical.isNotEmpty) {
+            patient?.criticalRecords[record.category] = record;
+          }
         }
       },
     ).listen((event) {
