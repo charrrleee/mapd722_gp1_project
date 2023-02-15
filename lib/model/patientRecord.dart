@@ -6,7 +6,7 @@ class PatientRecord {
   final String id;
   final String patientId;
   final String nurseName;
-  final String modifyDate;
+  final DateTime modifyDate;
   final CategoryEnum category;
   final String readings;
   String critical = "";
@@ -25,7 +25,7 @@ class PatientRecord {
       json.get("id", ""),
       json["patientId"],
       json["nurseName"],
-      json["modifyDate"],
+      DateTime.parse(json["modifyDate"]),
       parseCategory[json["category"]]!,
       json["readings"],
     );
