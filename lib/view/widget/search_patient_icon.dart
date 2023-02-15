@@ -80,7 +80,7 @@ class MySearchDelegate extends SearchDelegate with ChangeNotifier {
             var response = snapshot.data as ListResponse;
             // todo recommendList should be Patient Object;
             recommendList =
-                response.list!.map((e) => e["firstName"] as String).toList();
+                response.list!.map((e) => "${e['bedNumber']} ${e["firstName"]} ${e["lastName"]}").toList();
           }
           return ListView.builder(
             itemCount: suggestions.length,
