@@ -28,9 +28,9 @@ class PatientService {
     });
   }
 
-  create(Patient patient) async {
+  Future<GetResponse?> create(Patient patient) async {
     String url = "$baseURL/patients";
-    await http.post(Uri.parse(url), body: patient, headers: {
+    return await http.post(Uri.parse(url), body: patient.toJson(), headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }).then((response) {
       var jsonResponse = jsonDecode(response.body);
@@ -38,9 +38,9 @@ class PatientService {
     });
   }
 
-  get(String patientId) async {
+  Future<GetResponse?> get(String patientId) async {
     String url = "$baseURL/patients/$patientId}";
-    await http.get(Uri.parse(url), headers: {
+    return await http.get(Uri.parse(url), headers: {
       "Content-Type": "application/x-www-form-urlencoded"
     }).then((response) {
       var jsonResponse = jsonDecode(response.body);

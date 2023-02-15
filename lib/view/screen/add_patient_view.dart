@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mapd722_gp1_project/model/response.dart';
 
 import '../../framework.dart';
+import '../../model/patient.dart';
 import '../../routes.dart';
 import '../../view_model/screen/add_patient_view_model.dart';
 import '../widget/appBar.dart';
@@ -48,14 +50,15 @@ class AddPatientViewState
           ),
           IconButton(
             onPressed: () {
-              var success = vm.savePatient();
-              if (success) {
-                Navigator.pushNamed(
-                  context,
-                  Routes.viewPatient,
-                  arguments: vm.patientId,
-                );
-              }
+              vm.savePatient().then((response) {
+                if (response!.success) {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.viewPatient,
+                    arguments: Patient.fromJson(response.data!),
+                  );
+                }
+              });
             },
             icon: const Icon(Icons.save),
           )
@@ -67,12 +70,12 @@ class AddPatientViewState
             customTextField(
               "First Name",
               "",
-              (String? text) {},
+              vm.onChangeFirstName,
             ),
             customTextField(
               "Last Name",
               "",
-              (String? text) {},
+              vm.onChangeLastName,
             ),
           ],
         ),
@@ -81,26 +84,26 @@ class AddPatientViewState
             customTextField(
               "ID Card Number",
               "",
-              (String? text) {},
+              vm.onChangeIdCardNumber,
             ),
             customTextField(
               "Bed Number",
               "",
-              (String? text) {},
+              vm.onChangeBedNumber,
             ),
           ],
         ),
         Row(
           children: [
             customTextField(
-              "Age",
+              "Phone Number",
               "",
-              (String? text) {},
+              vm.onChangePhoneNumber,
             ),
             customTextField(
               "Gender",
               "",
-              (String? text) {},
+              vm.onChangeGender,
             ),
           ],
         ),
@@ -109,12 +112,12 @@ class AddPatientViewState
             customTextField(
               "Height (cm)",
               "",
-              (String? text) {},
+              vm.onChangeHeight,
             ),
             customTextField(
               "Weight (kg)",
               "",
-              (String? text) {},
+              vm.onChangeWeight,
             ),
           ],
         ),
@@ -126,14 +129,14 @@ class AddPatientViewState
             CupertinoButton(
               onPressed: () => _showDialog(
                 CupertinoDatePicker(
-                    initialDateTime: DateTime.now(),
+                    initialDateTime: vm.dateOfBirth,
                     mode: CupertinoDatePickerMode.date,
                     use24hFormat: true,
-                    onDateTimeChanged: (DateTime? datetime) {}),
+                    onDateTimeChanged: vm.onChangeDOB),
               ),
               child: Text(
-                DateTime.now().toIso8601String().substring(0, 10),
-                style: TextStyle(fontSize: 22.0, color: Colors.black),
+                vm.dateOfBirth.toIso8601String().substring(0, 10),
+                style: const TextStyle(fontSize: 22.0, color: Colors.black),
               ),
             )
           ],
@@ -143,16 +146,7 @@ class AddPatientViewState
             customTextField(
               "Image Url",
               "",
-              (String? text) {},
-            )
-          ],
-        ),
-        Row(
-          children: [
-            customTextField(
-              "Phone Number",
-              "",
-              (String? text) {},
+              vm.onChangeImageURL,
             )
           ],
         ),
@@ -161,7 +155,7 @@ class AddPatientViewState
             customTextField(
               "Email",
               "",
-              (String? text) {},
+              vm.onChangeEmail,
             )
           ],
         ),
@@ -170,8 +164,13 @@ class AddPatientViewState
             customTextField(
               "Address",
               "",
-              (String? text) {},
-            )
+              vm.onChangeAddress,
+            ),
+            customTextField(
+              "Postal Code",
+              "",
+              vm.onChangePostalCode,
+            ),
           ],
         ),
       ]),
