@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mapd722_gp1_project/view/widget/text.dart';
 
 import '../../framework.dart';
+import '../../model/patient.dart';
 import '../../routes.dart';
 import '../../view_model/screen/add_patient_record_view_model.dart';
 import '../widget/appBar.dart';
@@ -38,6 +39,8 @@ class AddPatientRecordViewState
 
   @override
   Widget buildChild(ctx, AddPatientRecordViewModel vm) {
+    vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
+
     return Scaffold(
       appBar: appBar(
         "Medical Record",
@@ -48,13 +51,14 @@ class AddPatientRecordViewState
             icon: const Icon(Icons.home),
           ),
           IconButton(
-            onPressed: () {
-              var success = vm.savePatientRecord();
-              if (success) {
+            onPressed: () async {
+              var response = await vm.savePatientRecord();
+              if (!mounted) return;
+              if (response) {
                 Navigator.pushNamed(
                   context,
                   Routes.viewPatientRecords,
-                  arguments: vm.patientId,
+                  arguments: vm.patient,
                 );
               }
             },
@@ -67,22 +71,26 @@ class AddPatientRecordViewState
           children: [
             const Text("Record Date",
                 style: TextStyle(fontSize: 25.0, color: Colors.black)),
-            const Spacer(),
             Expanded(
-                child: CupertinoButton(
-              onPressed: () => _showDialog(
-                CupertinoDatePicker(
-                  initialDateTime: DateTime.now(),
-                  mode: CupertinoDatePickerMode.dateAndTime,
-                  use24hFormat: true,
-                  onDateTimeChanged: (DateTime? datetime) {},
+              child: CupertinoButton(
+                onPressed: () => _showDialog(
+                  CupertinoDatePicker(
+                    initialDateTime: vm.recordDateTime,
+                    mode: CupertinoDatePickerMode.dateAndTime,
+                    use24hFormat: true,
+                    onDateTimeChanged: vm.onChangeRecordDateTime,
+                  ),
+                ),
+                child: Text(
+                  () {
+                    String convertedDateTime =
+                        "${vm.recordDateTime.year.toString()}-${vm.recordDateTime.month.toString().padLeft(2, '0')}-${vm.recordDateTime.day.toString().padLeft(2, '0')} ${vm.recordDateTime.hour.toString().padLeft(2, '0')}:${vm.recordDateTime.minute.toString().padLeft(2, '0')}";
+                    return convertedDateTime;
+                  }(),
+                  style: const TextStyle(fontSize: 22.0, color: Colors.black),
                 ),
               ),
-              child: Text(
-                DateTime.now().toIso8601String().toString(),
-                style: const TextStyle(fontSize: 22.0, color: Colors.black),
-              ),
-            ))
+            ),
           ],
         ),
         textFieldStyleWidget(
@@ -92,12 +100,12 @@ class AddPatientRecordViewState
               customTextField(
                 "Upper(mmHg)",
                 "",
-                (String? text) {},
+                vm.onChangeBloodPressureUpper,
               ),
               customTextField(
                 "Lower(mmHg)",
                 "",
-                (String? text) {},
+                vm.onChangeBloodPressureLower,
               )
             ],
           ),
@@ -109,7 +117,7 @@ class AddPatientRecordViewState
               customTextField(
                 "rate(/min)",
                 "",
-                (String? text) {},
+                vm.onChangeRespiratoryRate,
               ),
             ],
           ),
@@ -121,7 +129,7 @@ class AddPatientRecordViewState
               customTextField(
                 "level(%)",
                 "",
-                (String? text) {},
+                vm.onChangeBloodOxygenLevel,
               ),
             ],
           ),
@@ -133,12 +141,12 @@ class AddPatientRecordViewState
               customTextField(
                 "rate(/min)",
                 "",
-                (String? text) {},
+                vm.onChangeHeartBeatRate,
               ),
             ],
           ),
         ),
-        customTextField("Nurse", "", (String? text) {})
+        customTextField("Nurse", "", vm.onChangeNurseName)
       ]),
     );
   }

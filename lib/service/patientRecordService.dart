@@ -28,7 +28,7 @@ class PatientRecordService {
 
   Future<GetResponse?> create(PatientRecord record) async {
     var url = "$baseURL/patients/${record.patientId}/tests/";
-    var resp = await http.post(Uri.parse(url), body: record).then((response) {
+    var resp = await http.post(Uri.parse(url), body: record.toPayload()).then((response) {
       var jsonResponse = jsonDecode(response.body);
       return GetResponse.fromJson(jsonResponse);
     });

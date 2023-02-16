@@ -32,6 +32,17 @@ class PatientRecord {
     record.critical = markCriticalCondition(record.readings, record.category);
     return record;
   }
+
+  Map<String, dynamic> toPayload() {
+    return {
+      "id": id,
+      "patientId": patientId,
+      "nurseName": nurseName,
+      "modifyDate": modifyDate.toIso8601String(),
+      "category": category.text,
+      "readings": readings,
+    };
+  }
 }
 
 markCriticalCondition(String readings, CategoryEnum category) {
