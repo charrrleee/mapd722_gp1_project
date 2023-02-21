@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mapd722_gp1_project/view/screen/home_view.dart';
 import 'package:mapd722_gp1_project/view/widget/text.dart';
 
 import '../../framework.dart';
@@ -47,7 +48,7 @@ class AddPatientRecordViewState
         "Add Medical Record",
         [
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, Routes.home),
+            onPressed: () => Navigator.pushReplacementNamed(context, Routes.home),
             icon: const Icon(Icons.home),
           ),
           IconButton(

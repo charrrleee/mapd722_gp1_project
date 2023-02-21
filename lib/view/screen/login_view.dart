@@ -61,7 +61,7 @@ class LoginViewState extends BaseMVVMState<LoginView, LoginViewModel> {
             ],
           ),
           TextButton(
-            onPressed: () => Navigator.pushNamed(context, Routes.home),
+            onPressed: () => Navigator.pushReplacementNamed(context, Routes.home),
             child: const Text("Login"),
           ),
         ],

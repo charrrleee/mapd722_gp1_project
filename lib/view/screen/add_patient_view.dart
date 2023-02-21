@@ -47,7 +47,7 @@ class AddPatientViewState
         "",
         [
           IconButton(
-            onPressed: () => Navigator.pushNamed(context, Routes.home),
+            onPressed: () => Navigator.pushReplacementNamed(context, Routes.home),
             icon: const Icon(Icons.home),
           ),
           IconButton(
