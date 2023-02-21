@@ -36,7 +36,7 @@ class AddPatientRecordViewState
       ),
     );
   }
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget buildChild(ctx, AddPatientRecordViewModel vm) {
     vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
@@ -52,6 +52,7 @@ class AddPatientRecordViewState
           ),
           IconButton(
             onPressed: () async {
+              if (_formKey.currentState!.validate()) {
               var response = await vm.savePatientRecord();
               if (!mounted) return;
               if (response) {
@@ -61,12 +62,15 @@ class AddPatientRecordViewState
                   arguments: vm.patient,
                 );
               }
+              }
             },
             icon: const Icon(Icons.save),
           )
         ],
       ),
-      body: Column(children: [
+      body: Form(
+      key: _formKey,
+      child: Column(children: [
         Row(
           children: [
             const Text("Record Date",
@@ -101,11 +105,13 @@ class AddPatientRecordViewState
                 "Upper(mmHg)",
                 "",
                 vm.onChangeBloodPressureUpper,
+                vm.validateBP
               ),
               customTextField(
                 "Lower(mmHg)",
                 "",
                 vm.onChangeBloodPressureLower,
+                vm.validateBP
               )
             ],
           ),
@@ -118,6 +124,7 @@ class AddPatientRecordViewState
                 "rate(/min)",
                 "",
                 vm.onChangeRespiratoryRate,
+              vm.validateRR
               ),
             ],
           ),
@@ -130,6 +137,7 @@ class AddPatientRecordViewState
                 "level(%)",
                 "",
                 vm.onChangeBloodOxygenLevel,
+              vm.validateBO
               ),
             ],
           ),
@@ -142,12 +150,15 @@ class AddPatientRecordViewState
                 "rate(/min)",
                 "",
                 vm.onChangeHeartBeatRate,
+              vm.validateHBR
               ),
             ],
           ),
         ),
-        customTextField("Nurse", "", vm.onChangeNurseName)
+        customTextField("Nurse", "", vm.onChangeNurseName,
+              vm.validateEmptyOrNull)
       ]),
+      )
     );
   }
 

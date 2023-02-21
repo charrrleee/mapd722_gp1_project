@@ -35,6 +35,7 @@ class EditPatientViewState
       ),
     );
   }
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget buildChild(ctx, EditPatientViewModel vm) {
@@ -51,6 +52,7 @@ class EditPatientViewState
           ),
           IconButton(
             onPressed: () {
+              if (_formKey.currentState!.validate()) {
               vm.updatePatient().then((value) {
                 if (value == false) {
                   return;
@@ -61,12 +63,15 @@ class EditPatientViewState
                   arguments: vm.patient,
                 );
               });
+              }
             },
             icon: const Icon(Icons.save),
           )
         ],
       ),
-      body: Column(
+      body: Form(
+      key: _formKey,
+      child: Column(
         children: [
           const SizedBox(height: 50),
           Center(
@@ -79,11 +84,13 @@ class EditPatientViewState
                 "First Name",
                 vm.patient.firstname,
                 vm.onChangeFirstName,
+              vm.validateEmptyOrNull
               ),
               customTextField(
                 "Last Name",
                 vm.patient.lastname,
                 vm.onChangeLastName,
+              vm.validateEmptyOrNull
               ),
             ],
           ),
@@ -93,11 +100,13 @@ class EditPatientViewState
                 "Height (cm)",
                 vm.patient.height.toString(),
                 vm.onChangeHeight,
+              vm.validateHeight
               ),
               customTextField(
                 "Weight (kg)",
                 vm.patient.weight.toString(),
                 vm.onChangeWeight,
+              vm.validateWeight
               ),
             ],
           ),
@@ -126,9 +135,11 @@ class EditPatientViewState
             "Image Url",
             vm.patient.imgURL,
             vm.onChangeImageUrl,
+              vm.validateEmptyOrNull
           ),
         ],
       ),
+      )
     );
   }
 

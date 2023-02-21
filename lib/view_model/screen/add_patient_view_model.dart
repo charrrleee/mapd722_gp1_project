@@ -23,9 +23,22 @@ class AddPatientViewModel extends BaseViewModel {
   // it will be updated after api called
   String patientId = "";
 
+  validateEmptyOrNull(String? value){
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    }
+    return null;
+  }
+
   onChangeFirstName(String? text) {
     firstname = text!;
     notifyListeners();
+  }
+  validateFirstName(String? text){
+    if (text!.length > 50) {
+      return 'Should be less than';
+    }
+    return null;
   }
 
   onChangeLastName(String? text) {
@@ -43,9 +56,29 @@ class AddPatientViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  validateHeight(String? value){
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    } else if ( num.tryParse(value) == null
+    || num.parse(value!) < 50 
+    || num.parse(value!) > 250) {
+      return 'Please enter a number in range 50 - 250';
+    }
+    return null;
+  }
+
   onChangeWeight(String? text) {
     weight = text!;
     notifyListeners();
+  }
+
+  validateWeight(String? value){
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    } else if (num.tryParse(value) == null || num.parse(value!) < 1 || num.parse(value!) > 250) {
+      return 'Please enter a number in range 1 - 250';
+    }
+    return null;
   }
 
   onChangeBedNumber(String? text) {
@@ -68,9 +101,24 @@ class AddPatientViewModel extends BaseViewModel {
     notifyListeners();
   }
 
+  validatePhone(String? value){
+     if (value == null || value.isEmpty) {
+      return 'This field is required';
+    } 
+    return RegExp(r"^(?:[+0]9)?[0-9]{10}$")
+      .hasMatch(value!) ? null : "Please enter a valid phone number";
+  }
+
   onChangeEmail(String? text) {
     email = text!;
     notifyListeners();
+  }
+  validateEmail(String? value){
+     if (value == null || value.isEmpty) {
+      return 'This field is required';
+    } 
+    return RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+      .hasMatch(value!) ? null : "Please enter a valid email";
   }
 
   onChangeAddress(String? text) {

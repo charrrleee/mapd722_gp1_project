@@ -18,31 +18,62 @@ class AddPatientRecordViewModel extends BaseViewModel {
   String nurseName = "";
   var service = PatientRecordService();
 
+  validateEmptyOrNull(String? value){
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    }
+    return null;
+  }
   onChangeBloodPressureUpper(String? text) {
-    bloodPressureUpper = int.parse(text!);
+    bloodPressureUpper = text!.isNotEmpty ? int.parse(text!) : 0;
     notifyListeners();
   }
 
   onChangeBloodPressureLower(String? text) {
-    bloodPressureLower = int.parse(text!);
+    bloodPressureLower = text!.isNotEmpty ? int.parse(text!) : 0;
     notifyListeners();
+  }
+  
+  validateBP(String? value){
+    if ( value != null && value.isNotEmpty &&  ( num.tryParse(value) == null || num.parse(value!) < 50 || num.parse(value!) > 250)) {
+      return 'Please enter a number in range 50 - 250';
+    }
+    return null;
   }
 
   onChangeRespiratoryRate(String? text) {
-    respiratoryRate = int.parse(text!);
+    respiratoryRate = text!.isNotEmpty ? int.parse(text!) : 0;
     notifyListeners();
   }
 
+  validateRR(String? value){
+    if ( value != null && value.isNotEmpty &&  ( num.tryParse(value) == null || num.parse(value!) < 50 || num.parse(value!) > 250)) {
+      return 'Please enter a number in range 2 - 90';
+    }
+    return null;
+  }
   onChangeBloodOxygenLevel(String? text) {
-    bloodOxygenLevel = int.parse(text!);
+    bloodOxygenLevel = text!.isNotEmpty ? int.parse(text!) : 0;
     notifyListeners();
   }
 
+  validateBO(String? value){
+    if ( value != null && value.isNotEmpty && ( num.tryParse(value) == null || num.parse(value!) < 50 || num.parse(value!) > 250)) {
+      return 'Please enter a number in range 0 - 100';
+    }
+    return null;
+  }
   onChangeHeartBeatRate(String? text) {
-    heartBeatRate = int.parse(text!);
+    heartBeatRate = text!.isNotEmpty ? int.parse(text!) : 0;
     notifyListeners();
   }
 
+  validateHBR(String? value){
+    if ( value != null && value.isNotEmpty &&  ( num.tryParse(value) == null || num.parse(value!) < 50 || num.parse(value!) > 250)) {
+      return 'Please enter a number in range 0 - 200';
+    }
+    return null;
+  }
   onChangeRecordDateTime(DateTime? dateTime) {
     recordDateTime = dateTime!;
     notifyListeners();

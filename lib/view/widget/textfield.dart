@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-Widget customTextField(String label, String content, ValueChanged<String>? onChanged) {
+Widget customTextField(String label, String content, ValueChanged<String>? onChanged, Function? validationFunction) {
   return Expanded(
     child: Container(
       margin: const EdgeInsets.all(5),
@@ -12,6 +12,12 @@ Widget customTextField(String label, String content, ValueChanged<String>? onCha
           labelText: label,
         ),
         onChanged: onChanged,
+        validator: (value) {
+          if (validationFunction != null) {
+            return validationFunction(value);
+          }
+          return null;
+        },
       ),
     ),
   );

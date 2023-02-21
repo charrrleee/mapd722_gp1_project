@@ -19,7 +19,12 @@ class EditPatientViewModel extends BaseViewModel {
       return false;
     });
   }
-
+  validateEmptyOrNull(String? value){
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    }
+    return null;
+  }
   onChangeFirstName(String? text) {
     patient.firstname = text!;
     notifyListeners();
@@ -34,10 +39,27 @@ class EditPatientViewModel extends BaseViewModel {
     patient.height = double.parse(text!);
     notifyListeners();
   }
+  validateHeight(String? value){
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    } else if ( num.tryParse(value) == null || num.parse(value!) < 50 || num.parse(value!) > 250) {
+      return 'Please enter a number in range 50 - 250';
+    }
+    return null;
+  }
 
   onChangeWeight(String? text) {
     patient.weight = double.parse(text!);
     notifyListeners();
+  }
+
+  validateWeight(String? value){
+    if (value == null || value.isEmpty) {
+      return 'This field is required';
+    } else if ( num.tryParse(value) == null || num.parse(value!) < 1 || num.parse(value!) > 250) {
+      return 'Please enter a number in range 1 - 250';
+    }
+    return null;
   }
 
   onChangeImageUrl(String? text) {

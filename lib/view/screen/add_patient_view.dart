@@ -36,6 +36,8 @@ class AddPatientViewState
       ),
     );
   }
+ final _formKey = GlobalKey<FormState>();
+ 
 
   @override
   Widget buildChild(ctx, AddPatientViewModel vm) {
@@ -50,6 +52,7 @@ class AddPatientViewState
           ),
           IconButton(
             onPressed: () {
+              if (_formKey.currentState!.validate()) {
               vm.savePatient().then((response) {
                 if (response!.success) {
                   Navigator.pushNamed(
@@ -59,23 +62,28 @@ class AddPatientViewState
                   );
                 }
               });
+              }
             },
             icon: const Icon(Icons.save),
           )
         ],
       ),
-      body: Column(children: [
+      body: Form(
+      key: _formKey,
+      child: Column(children: [
         Row(
           children: [
             customTextField(
               "First Name",
               "",
               vm.onChangeFirstName,
+              vm.validateEmptyOrNull
             ),
             customTextField(
               "Last Name",
               "",
               vm.onChangeLastName,
+              vm.validateEmptyOrNull
             ),
           ],
         ),
@@ -85,11 +93,13 @@ class AddPatientViewState
               "ID Card Number",
               "",
               vm.onChangeIdCardNumber,
+              vm.validateEmptyOrNull
             ),
             customTextField(
               "Bed Number",
               "",
               vm.onChangeBedNumber,
+              vm.validateEmptyOrNull
             ),
           ],
         ),
@@ -99,12 +109,21 @@ class AddPatientViewState
               "Phone Number",
               "",
               vm.onChangePhoneNumber,
+              vm.validatePhone
             ),
-            customTextField(
-              "Gender",
-              "",
-              vm.onChangeGender,
+            Padding(padding: const EdgeInsets.only(left: 6.0), child: Text("Male"),) ,
+            Switch(
+              // This bool value toggles the switch.
+              
+              value: vm.gender == "Female" ? true : false,
+              activeColor: Colors.red,
+              inactiveTrackColor: Colors.blue,
+              onChanged: (bool value) {
+               vm.onChangeGender(value ? "Female" : "Male");
+              },
             ),
+            Padding(padding: const EdgeInsets.only(right: 6.0), child: Text("Female"),) ,
+
           ],
         ),
         Row(
@@ -113,18 +132,22 @@ class AddPatientViewState
               "Height (cm)",
               "",
               vm.onChangeHeight,
+              vm.validateHeight
             ),
             customTextField(
               "Weight (kg)",
               "",
               vm.onChangeWeight,
+              vm.validateWeight
             ),
           ],
         ),
         Row(
           children: [
-            const Text("Date of Birth",
-                style: TextStyle(fontSize: 25.0, color: Colors.black)),
+            const Padding( 
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text("Date of Birth",
+                style: TextStyle(fontSize: 20.0, color: Colors.black))),
             const Spacer(),
             CupertinoButton(
               onPressed: () => _showDialog(
@@ -147,6 +170,7 @@ class AddPatientViewState
               "Image Url",
               "",
               vm.onChangeImageURL,
+              vm.validateEmptyOrNull
             )
           ],
         ),
@@ -156,6 +180,7 @@ class AddPatientViewState
               "Email",
               "",
               vm.onChangeEmail,
+              vm.validateEmail
             )
           ],
         ),
@@ -165,15 +190,18 @@ class AddPatientViewState
               "Address",
               "",
               vm.onChangeAddress,
+              vm.validateEmptyOrNull
             ),
             customTextField(
               "Postal Code",
               "",
               vm.onChangePostalCode,
+              vm.validateEmptyOrNull
             ),
           ],
         ),
       ]),
+      )
     );
   }
 
