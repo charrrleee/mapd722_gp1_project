@@ -41,7 +41,7 @@ class ViewPatientRecordsViewState
     }
     return Scaffold(
         appBar: appBar(
-          "${vm.patient.id} ${vm.patient.firstname} ${vm.patient.lastname}",
+          "${vm.patient.firstname} ${vm.patient.lastname} (id: ${vm.patient.id})",
           "Medical Records",
           [
             IconButton(

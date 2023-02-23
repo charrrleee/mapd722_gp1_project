@@ -43,7 +43,7 @@ class EditPatientViewState
 
     return Scaffold(
       appBar: appBar(
-        "${vm.patient.id} ${vm.patient.firstname} ${vm.patient.lastname}",
+        "${vm.patient.firstname} ${vm.patient.lastname} (id: ${vm.patient.id})",
         "Patient Overview",
         [
           IconButton(
