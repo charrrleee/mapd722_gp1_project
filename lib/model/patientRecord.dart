@@ -54,10 +54,10 @@ markCriticalCondition(String readings, CategoryEnum category) {
       if (ranges.length == 1) {
         break;
       }
-      double upperBoundary = double.parse(ranges[1]);
-      if (boundary > 140 || upperBoundary > 90) {
+      double lowerBoundary = double.parse(ranges[1]);
+      if (boundary > 140 || lowerBoundary > 90) {
         critical = "High";
-      } else if (boundary < 60 || upperBoundary < 90) {
+      } else if (lowerBoundary < 60 || boundary < 90) {
         critical = "Low";
       }
       break;

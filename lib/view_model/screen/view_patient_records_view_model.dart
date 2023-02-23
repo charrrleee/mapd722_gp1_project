@@ -3,17 +3,36 @@ import 'package:mapd722_gp1_project/model/response.dart';
 import '../../framework.dart';
 import '../../model/patient.dart';
 import '../../model/patientRecord.dart';
+import '../../model/patientRecordsGroup.dart';
 import '../../service/patientRecordService.dart';
+import 'package:rxdart/rxdart.dart';
+
+import "package:collection/collection.dart";
 
 class ViewPatientRecordsViewModel extends BaseViewModel {
   late Patient patient;
-  List<PatientRecord> patientRecords = [];
+  var currentStartDate = DateTime.now().subtract(const Duration(days: 7));
+  var currentEndDate = DateTime.now();
+  List<PatientRecordsGroup> patientRecordsGroup = [];
   var service = PatientRecordService();
 
-  Future<ListResponse?> getPatientRecords() {
-    return service
-        .fetch(DateTime.now().subtract(const Duration(days: 7)), DateTime.now(),
-            patient.id)
-        .then((value) => value);
-  }
+  Future<List<PatientRecordsGroup>> getPatientRecords() {
+    print("Fetching ${currentStartDate} - ${currentEndDate}");
+    return service.fetch(currentStartDate, currentEndDate, patient.id).then(
+        (data) {
+      var groupedList = groupBy(data?.list as Iterable<Map<String, dynamic>>,
+          (Map<String, dynamic> obj) => obj['modifyDate']).entries.toList();
+      groupedList.forEach((element) {
+        var record = PatientRecordsGroup.fromJson(element);
+        patientRecordsGroup.add(record);
+      });
+      return patientRecordsGroup;
+    }).whenComplete(() => {
+          print(patientRecordsGroup),
+          currentStartDate = currentStartDate.subtract(const Duration(days: 7)),
+          currentEndDate = currentEndDate.subtract(const Duration(days: 7)),
+          print(currentStartDate),
+          print(currentEndDate)
+        });
+  } 
 }

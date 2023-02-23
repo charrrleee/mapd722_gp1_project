@@ -87,7 +87,7 @@ class AddPatientRecordViewModel extends BaseViewModel {
   // todo hard code nurse name
   savePatientRecord() async {
     var records = {
-      CategoryEnum.bloodPressure: [bloodPressureLower, bloodPressureUpper],
+      CategoryEnum.bloodPressure: [bloodPressureUpper, bloodPressureLower],
       CategoryEnum.bloodOxygenLevel: [bloodOxygenLevel],
       CategoryEnum.heartbeatRate: [heartBeatRate],
       CategoryEnum.respiratoryRate: [respiratoryRate],
