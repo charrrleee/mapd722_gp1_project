@@ -9,6 +9,7 @@ import '../../service/patientRecordService.dart';
 
 class HomeViewModel extends BaseViewModel {
   Map<String, Patient> patientMap = {};
+  Map<String, bool> patientHidden = {};
 
   HomeViewModel() {
     Rx.combineLatest2(
@@ -41,7 +42,22 @@ class HomeViewModel extends BaseViewModel {
         }
       },
     ).listen((event) {
+      
       notifyListeners();
     });
+  }
+
+  filterPatient(String input) {
+    if(input.isEmpty) { 
+      patientHidden = {}; 
+      return;
+    }
+    for(Patient p in patientMap.values){
+      if( p.bedNumber.toLowerCase().contains( input.toLowerCase())
+       || p.firstname.toLowerCase().contains( input.toLowerCase())
+       || p.lastname.toLowerCase().contains( input.toLowerCase())){
+        patientHidden[p.id] = false;
+      } else { patientHidden[p.id] = true; }
+    }
   }
 }
