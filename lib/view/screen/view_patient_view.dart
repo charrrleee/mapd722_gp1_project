@@ -22,77 +22,95 @@ class ViewPatientViewState
     vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
 
     return Scaffold(
-      appBar: appBar(
-        "${vm.patient.firstname} ${vm.patient.lastname} (id: ${vm.patient.id})",
-        "Patient Overview",
-        [
-          IconButton(
-            onPressed: () => Navigator.pushReplacementNamed(context, Routes.home),
-            icon: const Icon(Icons.home),
-          ),
-          IconButton(
-            onPressed: () => Navigator.pushNamed(
-              context,
-              Routes.editPatient,
-              arguments: vm.patient,
-            ),
-            icon: const Icon(Icons.edit),
-          ),
-          IconButton(
-            onPressed: () => Navigator.pushNamed(
-              context,
-              Routes.viewPatientRecords,
-              arguments: vm.patient,
-            ),
-            icon: const Icon(Icons.document_scanner),
-          )
-        ],
-      ),
-      body: Column(children: [
-        // todo make the rows as reuse components
-        Column(
-          children: [
-            const SizedBox(height: 50),
-            Image.network(vm.patient.imgURL),
-            const SizedBox(height: 50),
-            Row(
-              children: [
-                textFieldStyleWidget("First Name", Text(vm.patient.firstname)),
-                textFieldStyleWidget("Last Name", Text(vm.patient.lastname)),
-              ],
-            ),
-            Row(
-              children: [
-                textFieldStyleWidget("Gender", Text(vm.patient.gender)),
-                textFieldStyleWidget(
-                  "Disabled",
-                  Text(
-                    vm.patient.disabled ? "Yes" : "No",
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                textFieldStyleWidget(
-                    "Date of Birth",
-                    Text(vm.patient.dateOfBirth
-                        .toIso8601String()
-                        .substring(0, 10))),
-              ],
-            ),
-            Row(
-              children: [
-                textFieldStyleWidget(
-                    "Height", Text(vm.patient.height.toString())),
-                textFieldStyleWidget(
-                    "Weight", Text(vm.patient.weight.toString())),
-              ],
-            ),
-          ],
-        )
-      ]),
-    );
+        appBar: appBar(
+          "View Patient",
+          "",
+          [],
+        ),
+        body: Container(
+            padding: EdgeInsets.only(top: 16),
+            color: Colors.grey[200],
+            child: Column(children: [
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(children: [
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("${vm.patient.bedNumber} - ${vm.patient.firstname} ${vm.patient.lastname}"),
+                          Text("Patient Overview"),
+                        ]),
+                    Spacer(),
+                    IconButton(
+                      onPressed: () =>
+                          Navigator.pushReplacementNamed(context, Routes.home),
+                      icon: const Icon(Icons.home),
+                    ),
+                    IconButton(
+                      onPressed: () => Navigator.pushNamed(
+                        context,
+                        Routes.editPatient,
+                        arguments: vm.patient,
+                      ),
+                      icon: const Icon(Icons.edit),
+                    ),
+                    IconButton(
+                      onPressed: () => Navigator.pushNamed(
+                        context,
+                        Routes.viewPatientRecords,
+                        arguments: vm.patient,
+                      ),
+                      icon: const Icon(Icons.document_scanner),
+                    )
+                  ])),
+              Column(children: [
+                // todo make the rows as reuse components
+                Column(
+                  children: [
+                    const SizedBox(height: 50),
+                    Image.network(vm.patient.imgURL),
+                    const SizedBox(height: 50),
+                    Row(
+                      children: [
+                        textFieldStyleWidget(
+                            "First Name", Text(vm.patient.firstname)),
+                        textFieldStyleWidget(
+                            "Last Name", Text(vm.patient.lastname)),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        textFieldStyleWidget("Gender", Text(vm.patient.gender)),
+                        textFieldStyleWidget(
+                          "Disabled",
+                          Text(
+                            vm.patient.disabled ? "Yes" : "No",
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        textFieldStyleWidget(
+                            "Date of Birth",
+                            Text(vm.patient.dateOfBirth
+                                .toIso8601String()
+                                .substring(0, 10))),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        textFieldStyleWidget(
+                            "Height", Text(vm.patient.height.toString())),
+                        textFieldStyleWidget(
+                            "Weight", Text(vm.patient.weight.toString())),
+                      ],
+                    ),
+                  ],
+                )
+              ])
+            ])));
   }
 
   @override

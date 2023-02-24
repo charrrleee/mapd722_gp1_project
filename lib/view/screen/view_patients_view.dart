@@ -89,7 +89,6 @@ class ViewPatientsViewState
                   return ListTile(
                     title: Text(
                       "${patient.bedNumber} ${patient.firstname} ${patient.lastname}",
-                      style: const TextStyle(fontSize: 20),
                     ),
                     onTap: () => Navigator.pushNamed(
                       context,
