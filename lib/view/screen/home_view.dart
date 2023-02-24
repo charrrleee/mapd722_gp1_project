@@ -23,7 +23,6 @@ class HomeViewState extends BaseMVVMState<HomeView, HomeViewModel> {
   bool isInit = false;
   void onSearch(HomeViewModel vm, value) {
     vm.filterPatient(value);
-    print(value);
     setState(() {
       _patientMap = Map.from(vm.patientMap)
         ..removeWhere((k, v) => vm.patientHidden[k] == true);

@@ -28,11 +28,8 @@ class ViewPatientRecordsViewModel extends BaseViewModel {
       });
       return patientRecordsGroup;
     }).whenComplete(() => {
-          print(patientRecordsGroup),
           currentStartDate = currentStartDate.subtract(const Duration(days: 7)),
-          currentEndDate = currentEndDate.subtract(const Duration(days: 7)),
-          print(currentStartDate),
-          print(currentEndDate)
+          currentEndDate = currentEndDate.subtract(const Duration(days: 7))
         });
   } 
 }

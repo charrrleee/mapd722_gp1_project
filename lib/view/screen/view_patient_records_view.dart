@@ -31,7 +31,6 @@ class ViewPatientRecordsViewState
     vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
     patientRecordsGroup = vm.patientRecordsGroup;
     if (isInitPatientRecordsGroup == false) {
-      print("init");
       vm.getPatientRecords().whenComplete(() {
         setState(() {
           patientRecordsGroup = vm.patientRecordsGroup;
