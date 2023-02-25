@@ -35,6 +35,7 @@ class EditPatientViewState
       ),
     );
   }
+
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -42,105 +43,140 @@ class EditPatientViewState
     vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;
 
     return Scaffold(
-      appBar: appBar(
-        "${vm.patient.firstname} ${vm.patient.lastname} (id: ${vm.patient.id})",
-        "Patient Overview",
-        [
-          IconButton(
-            onPressed: () => Navigator.pushReplacementNamed(context, Routes.home),
-            icon: const Icon(Icons.home),
-          ),
-          IconButton(
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-              vm.updatePatient().then((value) {
-                if (value == false) {
-                  return;
-                }
-                Navigator.pushNamed(
-                  context,
-                  Routes.viewPatient,
-                  arguments: vm.patient,
-                );
-              });
-              }
-            },
-            icon: const Icon(Icons.save),
-          )
-        ],
-      ),
-      body: Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          const SizedBox(height: 50),
-          Center(
-            child: Image.network(vm.patient.imgURL),
-          ),
-          const SizedBox(height: 50),
-          Row(
-            children: [
-              customTextField(
-                "First Name",
-                vm.patient.firstname,
-                vm.onChangeFirstName,
-              vm.validateEmptyOrNull
-              ),
-              customTextField(
-                "Last Name",
-                vm.patient.lastname,
-                vm.onChangeLastName,
-              vm.validateEmptyOrNull
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              customTextField(
-                "Height (cm)",
-                vm.patient.height.toString(),
-                vm.onChangeHeight,
-              vm.validateHeight
-              ),
-              customTextField(
-                "Weight (kg)",
-                vm.patient.weight.toString(),
-                vm.onChangeWeight,
-              vm.validateWeight
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              const Text("Date of Birth",
-                  style: TextStyle(fontSize: 25.0, color: Colors.black)),
-              const Spacer(),
-              CupertinoButton(
-                onPressed: () => _showDialog(
-                  CupertinoDatePicker(
-                    initialDateTime: vm.patient.dateOfBirth,
-                    mode: CupertinoDatePickerMode.date,
-                    use24hFormat: true,
-                    onDateTimeChanged: vm.onDateTimeChanged,
-                  ),
-                ),
-                child: Text(
-                  vm.patient.dateOfBirth.toIso8601String().substring(0, 10),
-                  style: const TextStyle(fontSize: 22.0, color: Colors.black),
-                ),
-              )
-            ],
-          ),
-          customTextField(
-            "Image Url",
-            vm.patient.imgURL,
-            vm.onChangeImageUrl,
-              vm.validateEmptyOrNull
-          ),
-        ],
-      ),
-      )
-    );
+        appBar: appBar(
+          "Edit Patient",
+          "",
+          [],
+        ),
+        body: Container(
+            padding: EdgeInsets.only(top: 16),
+            color: Colors.grey[200],
+            child: Column(children: [
+              Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(children: [
+                    Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              "${vm.patient.bedNumber} - ${vm.patient.firstname} ${vm.patient.lastname}"),
+                          Text("Patient Overview"),
+                        ]),
+                    Spacer(),
+                    IconButton(
+                      onPressed: () =>
+                          Navigator.pushReplacementNamed(context, Routes.home),
+                      icon: const Icon(Icons.home),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          vm.updatePatient().then((value) {
+                            if (value == false) {
+                              return;
+                            }
+                            Navigator.pushNamed(
+                              context,
+                              Routes.viewPatient,
+                              arguments: vm.patient,
+                            );
+                          });
+                        }
+                      },
+                      icon: const Icon(Icons.save),
+                    )
+                  ])),
+              Form(
+                  key: _formKey,
+                  child: Expanded(
+                      child: Padding(
+                          padding: EdgeInsets.all(32),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              
+                              Center(
+                                child: Image.network(vm.patient.imgURL),
+                              ),
+                              
+                              Row(
+                                children: [
+                                  Text("First Name"),
+                                  customTextField(
+                                      "",
+                                      vm.patient.firstname,
+                                      vm.onChangeFirstName,
+                                      vm.validateEmptyOrNull),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Last Name"),
+                                  customTextField(
+                                      "",
+                                      vm.patient.lastname,
+                                      vm.onChangeLastName,
+                                      vm.validateEmptyOrNull),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text("Date of Birth"),
+                                  const Spacer(),
+                                  CupertinoButton(
+                                    onPressed: () => _showDialog(
+                                      CupertinoDatePicker(
+                                        initialDateTime: vm.patient.dateOfBirth,
+                                        mode: CupertinoDatePickerMode.date,
+                                        use24hFormat: true,
+                                        onDateTimeChanged: vm.onDateTimeChanged,
+                                      ),
+                                    ),
+                                    child: Text(
+                                      vm.patient.dateOfBirth
+                                          .toIso8601String()
+                                          .substring(0, 10)
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Height"),
+                                  customTextField(
+                                      "",
+                                      vm.patient.height.toString(),
+                                      vm.onChangeHeight,
+                                      vm.validateHeight),
+                                  Text("cm"),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Weight"),
+                                  customTextField(
+                                      "",
+                                      vm.patient.weight.toString(),
+                                      vm.onChangeWeight,
+                                      vm.validateWeight),
+                                  Text("(kg)"),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Text("Image Url"),
+                                  customTextField(
+                                      "",
+                                      vm.patient.imgURL,
+                                      vm.onChangeImageUrl,
+                                      vm.validateEmptyOrNull),
+                                ],
+                              ),
+                            ],
+                          ))))
+            ])));
   }
 
   @override
