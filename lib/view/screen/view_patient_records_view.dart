@@ -40,87 +40,102 @@ class ViewPatientRecordsViewState
     }
     return Scaffold(
         appBar: appBar(
-          "${vm.patient.firstname} ${vm.patient.lastname} (id: ${vm.patient.id})",
-          "Medical Records",
-          [
-            IconButton(
-              onPressed: () =>
-                  Navigator.pushReplacementNamed(context, Routes.home),
-              icon: const Icon(Icons.home),
-            ),
-            IconButton(
-              onPressed: () => Navigator.pushNamed(
-                  context, Routes.addPatientRecord,
-                  arguments: vm.patient),
-              icon: const Icon(Icons.add),
-            ),
-            IconButton(
-              onPressed: () => Navigator.pushNamed(context, Routes.viewPatient,
-                  arguments: vm.patient),
-              icon: const Icon(Icons.remove_red_eye),
-            )
-          ],
+          "",
+          "",
+          [],
         ),
         body: SingleChildScrollView(
 
             // this will make your body scrollable
             child: Container(
-              margin: EdgeInsets.all(15),
+                padding: EdgeInsets.only(top: 16),
+                color: Colors.grey[200],
                 child: Column(children: [
-          ExpansionPanelList(
-              expansionCallback: (index, isExpanded) {
-                setState(() {
-                  expanded[index] = !isExpanded;
-                });
-              },
-              animationDuration: Duration(milliseconds: 500),
-              //animation duration while expanding/collapsing
-              children: [
-                for (int i = 0; i < vm.patientRecordsGroup.length; i++)
-                  ExpansionPanel(
-                      headerBuilder: (context, isOpen) {
-                        return Container(
-                            margin: EdgeInsets.zero,
-                            color: vm.patientRecordsGroup[i].critical
-                                ? Colors.red[300]
-                                : Colors.grey[200],
-                            child: Padding(
-                                padding: EdgeInsets.all(15),
-                                child: Text(
-                                  () {
-                                    String convertedDateTime =
-                                        "${vm.patientRecordsGroup[i].modifyDate.year.toString()}-${vm.patientRecordsGroup[i].modifyDate.month.toString().padLeft(2, '0')}-${vm.patientRecordsGroup[i].modifyDate.day.toString().padLeft(2, '0')} ${vm.patientRecordsGroup[i].modifyDate.hour.toString().padLeft(2, '0')}:${vm.patientRecordsGroup[i].modifyDate.minute.toString().padLeft(2, '0')}";
-                                    return convertedDateTime;
-                                    //return recordsGroup.modifyDate.toString();
-                                  }(),
-                                  textAlign: TextAlign.left,
-                                )));
-                      },
-                      body: MedicalRecordItem(vm.patientRecordsGroup[i]),
-                      isExpanded: expanded[i] == true ? true : false),
-              ]),
-
-          /*ListView.builder(
-                  itemCount: vm.patientRecordsGroup.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                        title:
-                        
-                            MedicalRecordItem(vm.patientRecordsGroup[index]));
-                  })),*/
-          Padding(
-              padding: EdgeInsets.all(30),
-              child: FilledButton(
-                onPressed: () {
-                  vm.getPatientRecords().whenComplete(() {
-                    setState(() {
-                      patientRecordsGroup = vm.patientRecordsGroup;
-                    });
-                  });
-                },
-                child: Text("Load More"),
-              ))
-        ]))));
+                  Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16),
+                      child: Row(children: [
+                        Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                  "${vm.patient.bedNumber} - ${vm.patient.firstname} ${vm.patient.lastname}"),
+                              Text("Medical Records"),
+                            ]),
+                        Spacer(),
+                        IconButton(
+                          onPressed: () => Navigator.pushReplacementNamed(
+                              context, Routes.home),
+                          icon: const Icon(Icons.home),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.pushNamed(
+                              context, Routes.addPatientRecord,
+                              arguments: vm.patient),
+                          icon: const Icon(Icons.add),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.pushNamed(
+                              context, Routes.viewPatient,
+                              arguments: vm.patient),
+                          icon: const Icon(Icons.remove_red_eye),
+                        )
+                      ])),
+                  Container(
+                      margin: EdgeInsets.all(15),
+                      child: Column(children: [
+                        ExpansionPanelList(
+                            expansionCallback: (index, isExpanded) {
+                              setState(() {
+                                expanded[index] = !isExpanded;
+                              });
+                            },
+                            animationDuration: Duration(milliseconds: 500),
+                            //animation duration while expanding/collapsing
+                            children: [
+                              for (int i = 0;
+                                  i < vm.patientRecordsGroup.length;
+                                  i++)
+                                ExpansionPanel(
+                                    headerBuilder: (context, isOpen) {
+                                      return Container(
+                                          margin: EdgeInsets.zero,
+                                          color:
+                                              vm.patientRecordsGroup[i].critical
+                                                  ? Colors.red[300]
+                                                  : Colors.grey[200],
+                                          child: Padding(
+                                              padding: EdgeInsets.all(15),
+                                              child: Text(
+                                                () {
+                                                  String convertedDateTime =
+                                                      "${vm.patientRecordsGroup[i].modifyDate.year.toString()}-${vm.patientRecordsGroup[i].modifyDate.month.toString().padLeft(2, '0')}-${vm.patientRecordsGroup[i].modifyDate.day.toString().padLeft(2, '0')} ${vm.patientRecordsGroup[i].modifyDate.hour.toString().padLeft(2, '0')}:${vm.patientRecordsGroup[i].modifyDate.minute.toString().padLeft(2, '0')}";
+                                                  return convertedDateTime;
+                                                  //return recordsGroup.modifyDate.toString();
+                                                }(),
+                                                textAlign: TextAlign.left,
+                                              )));
+                                    },
+                                    body: MedicalRecordItem(
+                                        vm.patientRecordsGroup[i]),
+                                    isExpanded:
+                                        expanded[i] == true ? true : false),
+                            ]),
+                        Padding(
+                            padding: EdgeInsets.all(30),
+                            child: FilledButton(
+                              onPressed: () {
+                                vm.getPatientRecords().whenComplete(() {
+                                  setState(() {
+                                    patientRecordsGroup =
+                                        vm.patientRecordsGroup;
+                                  });
+                                });
+                              },
+                              child: Text("Load More"),
+                            ))
+                      ]))
+                ]))));
   }
 
   @override
