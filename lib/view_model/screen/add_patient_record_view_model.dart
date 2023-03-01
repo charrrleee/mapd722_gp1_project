@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:mapd722_gp1_project/model/patientRecord.dart';
+import 'package:mapd722_gp1_project/model/patient_record.dart';
 
 import '../../enums.dart';
 import '../../framework.dart';
 import '../../model/patient.dart';
-import '../../service/patientRecordService.dart';
+import '../../service/patient_record_service.dart';
 
 class AddPatientRecordViewModel extends BaseViewModel {
   // it will be updated after api called

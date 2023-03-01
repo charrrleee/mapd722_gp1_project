@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../enums.dart';
-import '../../model/patientRecordsGroup.dart';
+import '../../model/patient_records_group.dart';
 
 class MedicalRecordItem extends StatelessWidget {
   PatientRecordsGroup recordsGroup;

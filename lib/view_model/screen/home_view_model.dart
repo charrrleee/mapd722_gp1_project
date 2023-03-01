@@ -1,11 +1,11 @@
 import 'package:mapd722_gp1_project/model/patient.dart';
-import 'package:mapd722_gp1_project/model/patientRecord.dart';
+import 'package:mapd722_gp1_project/model/patient_record.dart';
 import 'package:mapd722_gp1_project/model/response.dart';
-import 'package:mapd722_gp1_project/service/patientService.dart';
+import 'package:mapd722_gp1_project/service/patient_service.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../framework.dart';
-import '../../service/patientRecordService.dart';
+import '../../service/patient_record_service.dart';
 
 class HomeViewModel extends BaseViewModel {
   Map<String, Patient> patientMap = {};

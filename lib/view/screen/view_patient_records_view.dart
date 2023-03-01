@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mapd722_gp1_project/model/patientRecord.dart';
-import 'package:mapd722_gp1_project/model/patientRecordsGroup.dart';
-import 'package:mapd722_gp1_project/model/response.dart';
+import 'package:mapd722_gp1_project/model/patient_records_group.dart';
 
 import '../../framework.dart';
 import '../../model/patient.dart';
 import '../../routes.dart';
 import '../../view_model/screen/view_patient_records_view_model.dart';
 import '../widget/appBar.dart';
-import '../widget/medicalRecordItem.dart';
-
-import "package:collection/collection.dart";
+import '../widget/medical_record_item.dart';
 
 class ViewPatientRecordsView extends StatefulWidget {
   const ViewPatientRecordsView({Key? key, required this.title})
@@ -26,6 +22,7 @@ class ViewPatientRecordsViewState
   List<PatientRecordsGroup> patientRecordsGroup = [];
   bool isInitPatientRecordsGroup = false;
   Map<int, bool> expanded = {};
+
   @override
   Widget buildChild(ctx, ViewPatientRecordsViewModel vm) {
     vm.patient = ModalRoute.of(ctx)!.settings.arguments as Patient;

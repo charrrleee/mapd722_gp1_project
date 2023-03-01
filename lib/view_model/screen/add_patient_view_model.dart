@@ -1,5 +1,5 @@
 import 'package:mapd722_gp1_project/model/response.dart';
-import 'package:mapd722_gp1_project/service/patientService.dart';
+import 'package:mapd722_gp1_project/service/patient_service.dart';
 
 import '../../framework.dart';
 import '../../model/patient.dart';

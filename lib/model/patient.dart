@@ -1,5 +1,5 @@
 import 'package:mapd722_gp1_project/ext.dart';
-import 'package:mapd722_gp1_project/model/patientRecord.dart';
+import 'package:mapd722_gp1_project/model/patient_record.dart';
 
 import '../enums.dart';
 

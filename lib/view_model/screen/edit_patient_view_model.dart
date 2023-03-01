@@ -2,7 +2,7 @@ import 'package:mapd722_gp1_project/model/response.dart';
 
 import '../../framework.dart';
 import '../../model/patient.dart';
-import '../../service/patientService.dart';
+import '../../service/patient_service.dart';
 
 class EditPatientViewModel extends BaseViewModel {
   // @override

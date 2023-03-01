@@ -2,9 +2,9 @@ import 'package:mapd722_gp1_project/model/response.dart';
 
 import '../../framework.dart';
 import '../../model/patient.dart';
-import '../../model/patientRecord.dart';
-import '../../model/patientRecordsGroup.dart';
-import '../../service/patientRecordService.dart';
+import '../../model/patient_record.dart';
+import '../../model/patient_records_group.dart';
+import '../../service/patient_record_service.dart';
 import 'package:rxdart/rxdart.dart';
 
 import "package:collection/collection.dart";

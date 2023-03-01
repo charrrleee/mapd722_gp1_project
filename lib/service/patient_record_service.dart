@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:mapd722_gp1_project/model/patientRecord.dart';
+import 'package:mapd722_gp1_project/model/patient_record.dart';
 
 import '../model/response.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mapd722_gp1_project/model/response.dart';
 
 import '../../routes.dart';
-import '../../service/patientService.dart';
+import '../../service/patient_service.dart';
 
 IconButton searchPatientIcon(BuildContext context) {
   return IconButton(
