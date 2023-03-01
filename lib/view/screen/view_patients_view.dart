@@ -4,7 +4,7 @@ import '../../framework.dart';
 import '../../model/patient.dart';
 import '../../routes.dart';
 import '../../view_model/screen/view_patients_view_model.dart';
-import '../widget/appBar.dart';
+import '../widget/app_bar.dart';
 
 import '../widget/search_patient_icon.dart';
 import '../widget/text.dart';

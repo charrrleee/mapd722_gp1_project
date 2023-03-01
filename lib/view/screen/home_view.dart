@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mapd722_gp1_project/view/widget/appBar.dart';
+import 'package:mapd722_gp1_project/view/widget/app_bar.dart';
 
 import '../../framework.dart';
 import '../../model/patient.dart';

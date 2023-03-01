@@ -5,7 +5,7 @@ import '../../framework.dart';
 import '../../model/patient.dart';
 import '../../routes.dart';
 import '../../view_model/screen/view_patient_records_view_model.dart';
-import '../widget/appBar.dart';
+import '../widget/app_bar.dart';
 import '../widget/medical_record_item.dart';
 
 class ViewPatientRecordsView extends StatefulWidget {

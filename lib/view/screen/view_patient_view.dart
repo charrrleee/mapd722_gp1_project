@@ -4,7 +4,7 @@ import 'package:mapd722_gp1_project/model/patient.dart';
 import '../../framework.dart';
 import '../../routes.dart';
 import '../../view_model/screen/view_patient_view_model.dart';
-import '../widget/appBar.dart';
+import '../widget/app_bar.dart';
 import '../widget/text.dart';
 
 class ViewPatientView extends StatefulWidget {
